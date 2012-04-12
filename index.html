@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+<title>Our Sphere 2</title>
+<script src="scripts/util.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/image_map.js"></script>
+<script>
+</script>
+<link href="stylesheets/app_stylesheet.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width" />
+<meta name = "viewport" content = "width = device-width , user-scalable = no , initial-scale = 1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+<body onload="initialize();">
+<div class="viewer"
+     ontouchstart="rotate_start(event);"
+	ontouchmove="rotate_move(event);"
+	ontouchend="rotate_end(event);"
+	onmousemove="rotate_move_mouse(event);"
+	onmousedown="rotate_start_mouse(event);">
+     <div class="planet" id="planet"><div class="planet-shadow" id="planet_shadow"></div></div>
+     
+</div>
+<div class="interface">
+     <!-- div class="controller">
+          <form>
+          <input value="0" type="number" step="10" max="360" min="0">
+          <input type="range" name="set_latitude" value="0" id="set_latitude" step="10" max="360" min="0">
+          </form>
+     </div -->
+     <div id = "mylog"></log>
+</dev>
+<div id="picture_factory" class="factory">
+</div>
+</body>
