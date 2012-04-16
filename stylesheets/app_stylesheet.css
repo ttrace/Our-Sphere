@@ -49,8 +49,8 @@ div.planet, div.planet-shadow{
 /*    -webkit-animation: sphereRotate 20s linear infinite; */
 }
 
-div.shadow {
-     background-color: rgba(200, 0, 0, 0.5);
+.planet-shadow canvas.shadow {
+     border: none;
 }
 
 .interface {

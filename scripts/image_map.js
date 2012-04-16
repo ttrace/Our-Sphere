@@ -1,4 +1,4 @@
-function mapping( map_image , start_point){
+function mapping( map_image , start_point, night){
      var long_start = 0.5;
      if(start_point){
           long_start = start_point;
@@ -13,7 +13,7 @@ function mapping( map_image , start_point){
                if( own_map ){
                     var upper_map = band_image( map_image, j );
                     var lower_map = band_image( map_image, j*-1 );
-                    console.log( upper_map );
+                   // console.log( upper_map );
                     if( upper_map == false || lower_map == false || upper_map.width == 0 || lower_map.width == 0){
                          setTimeout(function(){mapping( map_image , j )}, 100);
                          myLog("Building texture" + j, true);   
@@ -22,8 +22,8 @@ function mapping( map_image , start_point){
                }
                for ( i = 0; i < latitude_devide; i++ ) {
                     if( own_map ){
-                         create_slice(upper_map, i, j);
-                         create_slice(lower_map, i, (j*-1));
+                         setTimeout(create_slice(upper_map, i, j, night), 10);
+                         setTimeout(create_slice(lower_map, i, (j*-1), night), 10);
                     } else {
                          background_mapping(upper_map, i, j);
                          background_mapping(lower_map, i, (j*-1));                    
@@ -33,7 +33,7 @@ function mapping( map_image , start_point){
      }
 }
 
-function create_slice(slice_image, lat_step, lon_step){
+function create_slice(slice_image, lat_step, lon_step, night){
      var lat = lat_step * (360 / latitude_devide);
      var lon = lon_step * (90 / (longitude_devide));
 
@@ -49,7 +49,12 @@ function create_slice(slice_image, lat_step, lon_step){
 
     var  workspace = document.getElementById("picture_factory");
 
-     var mySlice = document.getElementById(lat_step+"_"+lon_step);
+     var element_appendix = "";
+     if( night ){
+          element_appendix = "night";
+     }
+     var mySlice = document.getElementById(element_appendix+lat_step+"_"+lon_step);
+//          console.log( (element_appendix+lat_step+"_"+lon_step) , mySlice);
           mySlice.width = bottom_length * myretina;
           mySlice.height = height_length * myretina;
 
@@ -134,10 +139,27 @@ function background_mapping(slice_image, lat_step, lon_step){
                                                   "";
 
           mySlice.style.webkitTransform = mySlice.style.webkitTransform + "scaleX("+(1/myretina)+") scaleY("+(1/myretina)+")";
-          mySlice.style.backgroundImage      = "url("+own_map_src+")";
+          mySlice.style.backgroundImage      = "url("+outer_map_src+")";
           mySlice.style.backgroundSize       = (lat_length * myretina) + "px " + (lon_length * myretina) + "px";
           mySlice.style.backgroundPosition   = (Math.floor(lat_length/360*lat) * myretina * -1) + "px " + (lon_offset * -1 * myretina) + "px";
 
 
           mySlice.style.border = "none";
+}
+
+function night_image(night_map, night_mask ){
+     
+     var night_workspace = document.createElement("CANVAS");
+          night_workspace.width = night_map.width;
+          night_workspace.height = night_map.height;
+
+     var ctx_night = night_workspace.getContext("2d");
+          ctx_night.drawImage( night_mask , 0, 0, night_workspace.width, night_workspace.height);
+          ctx_night.globalCompositeOperation = "source-in";
+          ctx_night.drawImage( night_map , 0, 0);
+
+     var night_image_respond = new Image();
+          night_image_respond.src = night_workspace.toDataURL("image/png");
+//     console.log( night_image_respond );
+     return( night_image_respond );
 }
