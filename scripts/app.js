@@ -12,6 +12,8 @@ function initialize (){
      planet_radius = document.getElementById("planet").clientHeight/2*0.8;
      build_planet();
 
+     ui_init();
+
      EarthMap = new Image();
           EarthMap.crossOrigin = "use-credentials";
      if( !getParameterByName("map") )
@@ -22,7 +24,7 @@ function initialize (){
           } else {
                EarthMap.src = "images/terra_10th_first_light_map_lrg_low.jpg";     
           }
-          EarthMap.addEventListener("load", setTimeout(function(){mapping(EarthMap)} ,100) ,false);
+          EarthMap.addEventListener("load", setTimeout(function(){mapping(EarthMap, 0.5 , false)} ,100) ,false);
      } else {
           own_map = false;
           outer_map_src = unescape(getParameterByName("map"));
@@ -40,8 +42,8 @@ function initialize (){
           var Night_map_composite = new Image();
                Night_map_composite = night_image(night_map, night_mask);
           
-          night_map.addEventListener("load", setTimeout(function(){ Night_map_composite = night_image(night_map, night_mask);} ,100) ,false);          
-          Night_map_composite.addEventListener("load", setTimeout(function(){ mapping( Night_map_composite , 0.5 , true);} ,100) ,false);          
+//          night_map.addEventListener("load", setTimeout(function(){ Night_map_composite = night_image(night_map, night_mask);} ,100) ,false);          
+//          Night_map_composite.addEventListener("load", setTimeout(function(){ mapping( Night_map_composite , 0.5 , true);} ,100) ,false);          
           
      }
 }
@@ -61,8 +63,10 @@ function build_planet(){
      }
      var MyPlanetX = MyPlanet.clientWidth;
      var MyPlanetY = MyPlanet.clientHeight;
-     MyPlanet.style.webkitTransformOrigin = MyPlanetX + "px" + MyPlanetY + "px 0";
-     MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
+     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
+     console.log( 'sphere',MyPlanet.style.webkitTransformOrigin );
+     MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(23.4deg)";
+     console.log( 'sphere',MyPlanet.style.webkitTransform );
 }
 
 function build_planet_shadow(){
@@ -81,8 +85,9 @@ function build_planet_shadow(){
      }
      var MyPlanetX = MyPlanet.clientWidth;
      var MyPlanetY = MyPlanet.clientHeight;
-     MyPlanet.style.webkitTransformOrigin = MyPlanetX + "px" + MyPlanetY + "px 0";
-     MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
+     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
+     console.log( 'shadow',MyPlanet.style.webkitTransformOrigin );
+     console.log( 'shadow',MyPlanet.style.webkitTransform );
 }
 
 function create_land_element( lat_step, lon_step, myShadow){
@@ -127,7 +132,7 @@ function create_land_element( lat_step, lon_step, myShadow){
           land_element.style.webkitTransform =    "translateX("+ bottom_length/2*-1 +"px)" +
                                                   "rotateY(" + (lat) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
-                                                  "translateZ("+ (offset_length * 0.98) +"px)"+
+                                                  "translateZ("+ (offset_length * 0.981) +"px)"+
                                                   "";
      }
      return( land_element );
@@ -142,7 +147,7 @@ initial_RotationZ = 0.0;
 function rotate_start( event ){
      startX = event.targetTouches[0].pageX;
      startY = event.targetTouches[0].pageY;
-     var MyPlanet = document.getElementById("planet");
+     var MyPlanet = document.getElementById("planet_group");
      MyPlanet.style.webkitAnimation ="";
 
      initial_Rotation();
@@ -150,7 +155,7 @@ function rotate_start( event ){
 }
 
 function rotate_end( event ){
-     var MyPlanet = document.getElementById("planet");
+     var MyPlanet = document.getElementById("planet_group");
 
      initial_Rotation();
      myLog('',true);
@@ -158,7 +163,7 @@ function rotate_end( event ){
 
 function rotate_move( event ){
      event.preventDefault();
-     var MyPlanet = document.getElementById("planet");
+     var MyPlanet = document.getElementById("planet_group");
 
      var Planet_height = MyPlanet.clientHeight;
      var Planet_width = MyPlanet.clientWidth;
@@ -201,7 +206,7 @@ document.onmouseup = function() {
      };
 
 function initial_Rotation(){
-     var MyPlanet = document.getElementById("planet");
+     var MyPlanet = document.getElementById("planet_group");
           initial_RotationX = parseFloat(MyPlanet.style.webkitTransform.split("deg")[0].split("(")[1])%180;
           initial_RotationY = parseFloat(MyPlanet.style.webkitTransform.split("deg")[1].split("(")[1])%360;
           initial_RotationZ = parseFloat(MyPlanet.style.webkitTransform.split("deg")[2].split("(")[1])%360;
@@ -211,7 +216,7 @@ function initial_Rotation(){
 function rotate_move_mouse( event ){
      if(isMouseDown){
           event.preventDefault();
-          var MyPlanet = document.getElementById("planet");
+          var MyPlanet = document.getElementById("planet_group");
      
           var Planet_height = MyPlanet.clientHeight;
           var Planet_width = MyPlanet.clientWidth;

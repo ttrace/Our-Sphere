@@ -75,7 +75,6 @@ function create_slice(slice_image, lat_step, lon_step, night){
 }
 
 function band_image( map_image, lon_step){
-//     console.log('band');
 
      var my_planet_radius = planet_radius;
      var lon = lon_step * (90 / (longitude_devide));
@@ -161,5 +160,6 @@ function night_image(night_map, night_mask ){
      var night_image_respond = new Image();
           night_image_respond.src = night_workspace.toDataURL("image/png");
 //     console.log( night_image_respond );
-     return( night_image_respond );
+     mapping( night_image_respond , 0.5 , true);
+//     return( night_image_respond );
 }
