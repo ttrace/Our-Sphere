@@ -7,8 +7,8 @@ outer_map_src = "";
 //myretina = 2; // for test retina resolution on standard display
 
 function initialize (){
-     latitude_devide = 24;
-     longitude_devide = 9;
+     latitude_devide = 18;
+     longitude_devide = 6;
      planet_radius = document.getElementById("planet").clientHeight/2*0.8;
      build_planet();
 
@@ -39,12 +39,17 @@ function initialize (){
                night_map.src = "images/earth_lights_lrg.jpg";
           build_planet_shadow();
 
-          var Night_map_composite = new Image();
-               Night_map_composite = night_image(night_map, night_mask);
+//          var Night_map_composite = new Image();
+//               Night_map_composite = night_image(night_map, night_mask);
           
-//          night_map.addEventListener("load", setTimeout(function(){ Night_map_composite = night_image(night_map, night_mask);} ,100) ,false);          
+          night_map.addEventListener("load", setTimeout(function(){ night_image(night_map, night_mask);} ,100) ,false);          
 //          Night_map_composite.addEventListener("load", setTimeout(function(){ mapping( Night_map_composite , 0.5 , true);} ,100) ,false);          
           
+     }
+     
+     if( getParameterByName("satellite") ){
+          var mySat = new satellite();
+               mySat.build();
      }
 }
 
@@ -85,9 +90,9 @@ function build_planet_shadow(){
      }
      var MyPlanetX = MyPlanet.clientWidth;
      var MyPlanetY = MyPlanet.clientHeight;
-     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
-     console.log( 'shadow',MyPlanet.style.webkitTransformOrigin );
-     console.log( 'shadow',MyPlanet.style.webkitTransform );
+//     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
+//     console.log( 'shadow',MyPlanet.style.webkitTransformOrigin );
+//     console.log( 'shadow',MyPlanet.style.webkitTransform );
 }
 
 function create_land_element( lat_step, lon_step, myShadow){
@@ -119,6 +124,7 @@ function create_land_element( lat_step, lon_step, myShadow){
                                                   height_length/2 + "px 0px";
 
           land_element.style.webkitTransform =    "translateX("+ bottom_length/2*-1 +"px)" +
+                                                  "translateY("+ height_length/2*-1 +"px)" + 
                                                   "rotateY(" + (lat) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
                                                   "translateZ("+ (offset_length * 0.98) +"px)"+

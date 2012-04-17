@@ -6,28 +6,35 @@ body {
      -webkit-user-select: none;
      margin: 0;
      padding: 0;
+     overflow: hidden;
+}
+
+div#wrapper{
+     height: 100%;
+     width: 100%;
+     margin: 0;
+     padding: 0;
 }
 
 div.viewer {
      position: absolute;
      height: 100%;
      width: 100%;
-     top: 0px;
+/*     top: 0px;
      left: 0px;
-/*     background-color: rgba(0, 0, 0, 0.5);*/
-     background-color: rgba(0, 0, 0, 0.7);
+     background-color: rgba(0, 0, 0, 0.5);*/
      -webkit-perspective: 4000;
-     -webkit-transform-origin: 50% 50% 0;
+/*     -webkit-transform-origin: 50% 50% 0; */
      -webkit-transform-style: preserve-3d;
 }
 
-div.planet, div.planet-shadow{
+div.planet{
      position: absolute;
      width: 100%;
      height: 100%;
-     top: 0px;
+/*     top: 0px;
      left: 0px;
-     -webkit-transform-origin: 50% 50% 0;
+     -webkit-transform-origin: 50% 50% 0; */
      -webkit-transform-style: preserve-3d;
 /*     -webkit-animation: sphereRotate 40s linear infinite; */
 }
@@ -39,7 +46,7 @@ div.planet, div.planet-shadow{
      width: 0px;
      height: 0px;
      font-size: 6pt;
-     border: white solid 1px;
+     border: white solid 0.5pt;
 }
 
 .viewer .planet canvas {
@@ -53,12 +60,17 @@ div.planet, div.planet-shadow{
 /*    -webkit-animation: sphereRotate 20s linear infinite; */
 }
 
-.planet-shadow canvas.shadow {
-     border: none;
-}
 
 .interface {
      -webkit-transform-style: preserve-3d;
+     position: absolute;
+     top: 0px;
+     left: 0px;
+}
+
+.interface #satellite_tle {
+     -webkit-user-select: auto;
+     -webkit-transform: translateZ(100px);
 }
 
 .controller, #mylog {

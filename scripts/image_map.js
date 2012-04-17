@@ -54,7 +54,7 @@ function create_slice(slice_image, lat_step, lon_step, night){
           element_appendix = "night";
      }
      var mySlice = document.getElementById(element_appendix+lat_step+"_"+lon_step);
-//          console.log( (element_appendix+lat_step+"_"+lon_step) , mySlice);
+//          console.log( (element_appendix+lat_step+"_"+lon_step));
           mySlice.width = bottom_length * myretina;
           mySlice.height = height_length * myretina;
 
