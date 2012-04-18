@@ -24,8 +24,8 @@ Orb.Satellite = Orb.Satellite || function(tle){
 
     //epoch_year should be smaller than 2057.
     if(epy<57){var epoch_year=epy+2000}else{var epoch_year=epy+1900};
-    var bstar_mantissa = Number(line1.substring(53,59))*1e-5;
-    var bstar_exponent = Number("1e" + Number(line1.substring(59,61)));
+    var bstar_mantissa = Number(line1.split(/\s+/)[6].match(/^[0-9]+/)[0])*1e-5;
+    var bstar_exponent = Number("1e" + Number(line1.split(/\s+/)[6].match(/^[0-9]+(.+)/)[1]));
     var bstar = bstar_mantissa*bstar_exponent
 
     var orbital_elements={
@@ -51,10 +51,11 @@ Orb.Satellite = Orb.Satellite || function(tle){
       eccentricity : Number(line2.split(/\s+/)[4]),
       argument_of_perigee : Number(line2.split(/\s+/)[5]),
       mean_anomaly : Number(line2.split(/\s+/)[6]),
-      mean_motion : Number(line2.split(/\s+/)[7]),
-      rev_number_at_epoch : Number(line2.split(/\s+/)[8].match(/(.+).$/)[1]),
+      mean_motion : Number(line2.split(/\s+/)[7].match(/([0-9\.\-]{1,11})/)[1]),
+      rev_number_at_epoch : Number(line2.split(/\s+/)[7].match(/(.....).$/)[1]),
       check_sum_2 :   Number(line1.substring(68,69))
     }
+     console.log(orbital_elements);
     return orbital_elements
   }
   

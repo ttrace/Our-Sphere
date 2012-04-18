@@ -21,8 +21,8 @@ div.viewer {
      height: 100%;
      width: 100%;
 /*     top: 0px;
-     left: 0px;
-     background-color: rgba(0, 0, 0, 0.5);*/
+     left: 0px;  
+     background-color: rgba(255, 0, 0, 0.5); */
      -webkit-perspective: 4000;
 /*     -webkit-transform-origin: 50% 50% 0; */
      -webkit-transform-style: preserve-3d;
@@ -46,7 +46,7 @@ div.planet{
      width: 0px;
      height: 0px;
      font-size: 6pt;
-     border: white solid 0.5pt;
+     border: white solid 1pt;
 }
 
 .viewer .planet canvas {
@@ -83,6 +83,14 @@ div.planet{
      -webkit-transform: translateZ(500px);
 }
 
+.orbit-dot {
+     width: 4px;
+     height: 4px;
+     -webkit-animation: dotAnimation 2s linear infinite;
+     border-radius: 2px;
+     border: 1px black solid;
+/*     -webkit-transform-origin: 2px 2px 0px; */
+}
 
 /**/
 @-webkit-keyframes sphereRotate
@@ -95,6 +103,27 @@ div.planet{
 	100%
 	{
 		-webkit-transform: rotateX(-20deg) rotateY( 360deg) ;
+	}
+}
+
+@-webkit-keyframes dotAnimation
+{
+	0%
+	{
+	     opacity: 0;
+		-webkit-transform: rotateX(0deg) rotateY(0deg);
+	}
+	
+	50%
+	{
+	     opacity: 1;
+		-webkit-transform: rotateX(180deg) rotateY(180deg);
+	}
+	
+	100%
+	{
+          opacity: 0;
+		-webkit-transform: rotateX(360deg) rotateY(360deg);
 	}
 }
 

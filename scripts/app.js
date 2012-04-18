@@ -9,7 +9,7 @@ outer_map_src = "";
 function initialize (){
      latitude_devide = 18;
      longitude_devide = 6;
-     planet_radius = document.getElementById("planet").clientHeight/2*0.8;
+     planet_radius = document.getElementById("viewer").clientHeight/2*0.8;
      build_planet();
 
      ui_init();
@@ -28,7 +28,7 @@ function initialize (){
      } else {
           own_map = false;
           outer_map_src = unescape(getParameterByName("map"));
-          console.log("loading_image",outer_map_src);
+//          console.log("loading_image",outer_map_src);
           mapping();
      }
 
@@ -66,12 +66,13 @@ function build_planet(){
                MyPlanet.appendChild( create_land_element(i, (j)*-1, false) );
           }
      }
-     var MyPlanetX = MyPlanet.clientWidth;
-     var MyPlanetY = MyPlanet.clientHeight;
-     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
-     console.log( 'sphere',MyPlanet.style.webkitTransformOrigin );
-     MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(23.4deg)";
-     console.log( 'sphere',MyPlanet.style.webkitTransform );
+//     var MyPlanetX = MyPlanet.clientWidth;
+//     var MyPlanetY = MyPlanet.clientHeight;
+//     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
+     console.log( MyPlanet.style.webkitTransformOrigin );
+     MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
+//     MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
+     console.log( MyPlanet.style.webkitTransform );
 }
 
 function build_planet_shadow(){
@@ -104,7 +105,7 @@ function create_land_element( lat_step, lon_step, myShadow){
      }
 
      var my_planet_radius = planet_radius;
-     if( myShadow ){ my_planet_radius = planet_radius + 5};
+     if( myShadow ){ my_planet_radius = planet_radius + 2};
 
      var bottom_length =  Math.sin( (360 / latitude_devide / 2) / 180 * Math.PI ) * 2 * Math.cos( (Math.abs(lon) - 90 / longitude_devide / 2 ) / 180 * Math.PI ) * my_planet_radius;
      var height_length =  Math.sin( (90 / longitude_devide / 2) / 180 * Math.PI ) *2* my_planet_radius;
@@ -127,7 +128,7 @@ function create_land_element( lat_step, lon_step, myShadow){
                                                   "translateY("+ height_length/2*-1 +"px)" + 
                                                   "rotateY(" + (lat) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
-                                                  "translateZ("+ (offset_length * 0.98) +"px)"+
+                                                  "translateZ("+ (offset_length) +"px)"+
                                                   "";
 
      if( !myShadow ){
@@ -136,9 +137,10 @@ function create_land_element( lat_step, lon_step, myShadow){
      } else {
           land_element.className             =  "shadow";
           land_element.style.webkitTransform =    "translateX("+ bottom_length/2*-1 +"px)" +
+                                                  "translateY("+ height_length/2*-1 +"px)" + 
                                                   "rotateY(" + (lat) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
-                                                  "translateZ("+ (offset_length * 0.981) +"px)"+
+                                                  "translateZ("+ (offset_length) +"px)"+
                                                   "";
      }
      return( land_element );
