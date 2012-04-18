@@ -48,7 +48,7 @@ function initialize (){
      }
      
      if( getParameterByName("satellite") ){
-          var mySat = new satellite();
+          var mySat = new oursatellite();
                mySat.build();
      }
 }
