@@ -132,6 +132,7 @@ function background_mapping(slice_image, lat_step, lon_step){
           mySlice.style.webkitTransform = "";
           mySlice.style.webkitTransformOrigin = bottom_length/2 * myretina + "px " + height_length/2 * myretina + "px 0px";
           mySlice.style.webkitTransform =         "translateX("+ (bottom_length/2*-1) * myretina +"px)" +
+                                                  "translateY("+ (height_length/2*-1) * myretina +"px)" + 
                                                   "rotateY(" + (lat) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
                                                   "translateZ("+ (offset_length * 0.98) +"px)"+

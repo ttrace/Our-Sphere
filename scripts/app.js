@@ -7,12 +7,12 @@ outer_map_src = "";
 //myretina = 2; // for test retina resolution on standard display
 
 function initialize (){
+     ui_init();
+
      latitude_devide = 18;
      longitude_devide = 6;
      planet_radius = document.getElementById("viewer").clientHeight/2*0.8;
      build_planet();
-
-     ui_init();
 
      EarthMap = new Image();
           EarthMap.crossOrigin = "use-credentials";
@@ -66,12 +66,10 @@ function build_planet(){
                MyPlanet.appendChild( create_land_element(i, (j)*-1, false) );
           }
      }
-//     var MyPlanetX = MyPlanet.clientWidth;
-//     var MyPlanetY = MyPlanet.clientHeight;
-//     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
+
      console.log( MyPlanet.style.webkitTransformOrigin );
      MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
-//     MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
+
      console.log( MyPlanet.style.webkitTransform );
 }
 
