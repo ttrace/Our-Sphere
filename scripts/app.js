@@ -234,6 +234,7 @@ function rotate_move_mouse( event ){
           var  curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
 
           MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
-                   
+          face_satellite([curX,curY]);                   
           }
      }
+

@@ -119,6 +119,7 @@ oursatellite.prototype.build = function(){
 
 //          console.log("SAT", date_step, sat_position_step );
           var current_satellite_image = document.createElement("CANVAS");
+               current_satellite_image.className = "current-sat";
                if( this.name.match(/ISS/)) current_satellite_image.className = "current-sat iss";
                //current_satellite_image.style.backgroundColor = "rgb(0, 255, 0)";
                current_satellite_image.style.border = "none";
@@ -202,4 +203,21 @@ oursatellite.prototype.update = function(){
                                             "translateY("+(ypos-10)+"px)" +
                                             "translateZ("+zpos+"px)";
      
+}
+
+function face_satellite( planet_rotation ){
+     var satellites = document.getElementsByClassName("current-sat");
+     //console.log(planet_rotation);
+     if( satellites.length > 0 ){
+          for ( i = 0; i < satellites.length; i++ ) {
+               if( satellites[i].nodeName == "CANVAS"){
+                    var my_satellite = satellites[i];
+                    my_satellite.style.webkitTransform = "";
+                    my_satellite.style.webkitTransform = "translateX(-20px)  translateY(-20px) "+
+                                                       " rotateX("+ (planet_rotation[0]*-1) +"deg) "+
+                                                       " rotateY("+ (planet_rotation[1]*-1) +"deg)";
+                    //console.log(my_satellite.style.webkitTransform);
+               }
+          }
+     }
 }

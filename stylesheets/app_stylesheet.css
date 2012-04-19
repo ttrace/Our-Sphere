@@ -96,19 +96,19 @@ div#planet{
 /*     -webkit-transform-origin: 2px 2px 0px; */
 }
 
-.current-sat {
+div.current-sat {
 	-webkit-transition-property			: -webkit-transform ;
 	-webkit-transition-duration			: 5s;
 	-webkit-transition-timing-function:	: linear;
 }
 
-.current-sat canvas.iss {
+canvas.iss.current-sat {
      background-image: url('../images/iss.png');
      -webkit-background-size: 100% 100%;
      border:none;
 }
 
-.current-sat canvas {
+canvas.current-sat {
      background-image: url('../images/sat.png');
      -webkit-background-size: 100% 100%;
      border:none;
