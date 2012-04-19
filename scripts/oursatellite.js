@@ -56,12 +56,6 @@ oursatellite.prototype ={
 		if (!("_satellite" in this))
 		{
                var tle_for_orb = { "name" : this.name ,"first_line" : this.first_line, "second_line" : this.second_line  };
-//              console.log( "old", tle_for_orb );
-//                               tle_for_orb = {"name" : this.name ,
-//                            "first_line":  "1 25544U 98067A   11318.51274148  .00016717  00000-0  10270-3 0  9003",
-//                            "second_line": "2 25544  51.6365 124.1685 0021724  56.2169 304.1052 15.60123650 24381"
-//                          }
-//               console.log( "new", tle_for_orb );
                this._satellite = new Orb.Satellite( tle_for_orb );
           }
 		return this._satellite;
@@ -110,7 +104,7 @@ oursatellite.prototype.build = function(){
 
           var current_satellite = document.createElement("DIV");
                current_satellite.className = "current-sat";
-               current_satellite.style.backgroundColor = "rgb(255, 255, 0)";
+               //current_satellite.style.backgroundColor = "rgb(255, 255, 0)";
                current_satellite.style.position = "absolute";
                current_satellite.style.top = "50%";
                current_satellite.style.left = "50%";
@@ -125,15 +119,16 @@ oursatellite.prototype.build = function(){
 
 //          console.log("SAT", date_step, sat_position_step );
           var current_satellite_image = document.createElement("CANVAS");
-               current_satellite_image.style.backgroundColor = "rgb(0, 255, 0)";
-               current_satellite_image.style.border = "black solid 1px";
+               if( this.name.match(/ISS/)) current_satellite_image.className = "current-sat iss";
+               //current_satellite_image.style.backgroundColor = "rgb(0, 255, 0)";
+               current_satellite_image.style.border = "none";
                current_satellite_image.style.position = "absolute";
                current_satellite_image.style.top = "50%";
                current_satellite_image.style.left = "50%";
-               current_satellite_image.style.width = "20px";
-               current_satellite_image.style.height = "20px";
-               current_satellite_image.style.webkitTransformOrigin = "10px 10px 0px";
-               current_satellite_image.style.webkitTransform = "translateX(-10px) translateY(-10px) rotateY(0deg)";
+               current_satellite_image.style.width = "40px";
+               current_satellite_image.style.height = "40px";
+               current_satellite_image.style.webkitTransformOrigin = "20px 20px 0px";
+               current_satellite_image.style.webkitTransform = "translateX(-20px) translateY(-20px) rotateY(0deg)";
      
                current_satellite.appendChild( current_satellite_image );
                orbit_plane.appendChild( current_satellite );
@@ -153,9 +148,6 @@ oursatellite.prototype.build = function(){
           var sat_att = planet_radius + sat_position_geo_step.altitude /  6378.137 * planet_radius;
           var orbit_dot_wrapper = document.createElement("div");
 
-//          console.log("DOT", date_step, sat_position_step );
-
-//          orbit_dot_wrapper.id = ( i * 5 ) + "deg";
           orbit_dot_wrapper.style.position = "absolute";
           orbit_dot_wrapper.style.top = "50%";
           orbit_dot_wrapper.style.left = "50%";
@@ -205,8 +197,6 @@ oursatellite.prototype.update = function(){
      var sat_lat = sat_position_geo_step.latitude;
      var sat_lon = sat_position_geo_step.longitude;
      var sat_att = planet_radius + sat_position_geo_step.altitude /  6378.137 * planet_radius;
-
-//     console.log("update", xpos, zpos, ypos, target_satellite);
     
           target_satellite.style.webkitTransform =  "translateX("+(xpos-10)+"px)" +
                                             "translateY("+(ypos-10)+"px)" +

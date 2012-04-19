@@ -58,11 +58,11 @@ function create_slice(slice_image, lat_step, lon_step, night){
      
      // create trapetoizo image transformation factory
       var mySlice = document.getElementById(element_appendix+lat_step+"_"+lon_step);
-           mySlice.width = bottom_length * myretina;
+           mySlice.width = Math.ceil(bottom_length) * myretina;
            mySlice.height = height_length * myretina;
 
       var mySlice_hidden = document.createElement("CANVAS");
-           mySlice_hidden.width = bottom_length * myretina;
+           mySlice_hidden.width = Math.ceil(bottom_length) * myretina;
            mySlice_hidden.height = height_length * myretina;
 
      var  ctx_slice = mySlice.getContext("2d");
@@ -105,17 +105,17 @@ function create_slice(slice_image, lat_step, lon_step, night){
           var out_pixel_slice  = ctx_slice_offscreen.createImageData(  mySlice_hidden.width + 1, 1 );
           var input_data = my_pixel_slice.data;
           var output_data = out_pixel_slice.data;
-          var start_x = Math.floor((bottom_length - upper_length) / 2 * myretina + slant_increasing_rate * si);
+          var start_x = Math.ceil((bottom_length - upper_length) / 2 * myretina + slant_increasing_rate * si);
           if( lon_step < 0 ) start_x = -1 * slant_increasing_rate * si;
           
           var line_scale = (upper_length - slant_increasing_rate * si * 2 / myretina) / bottom_length;
           if( lon_step < 0 ) line_scale = (bottom_length + slant_increasing_rate * si * 2 / myretina) / bottom_length;
          // console.log( "upper_length"+upper_length,"bottom_length"+bottom_length,line_scale );
           for ( var sj = 0; sj < mySlice_hidden.width + myretina ; sj++ ) {
-               output_data[ Math.floor(sj * line_scale) * 4     ] = input_data[ sj * 4     ];
-               output_data[ Math.floor(sj * line_scale) * 4 + 1 ] = input_data[ sj * 4 + 1 ];
-               output_data[ Math.floor(sj * line_scale) * 4 + 2 ] = input_data[ sj * 4 + 2 ];
-               output_data[ Math.floor(sj * line_scale) * 4 + 3 ] = input_data[ sj * 4 + 3 ];
+               output_data[ Math.ceil(sj * line_scale) * 4     ] = input_data[ sj * 4     ];
+               output_data[ Math.ceil(sj * line_scale) * 4 + 1 ] = input_data[ sj * 4 + 1 ];
+               output_data[ Math.ceil(sj * line_scale) * 4 + 2 ] = input_data[ sj * 4 + 2 ];
+               output_data[ Math.ceil(sj * line_scale) * 4 + 3 ] = input_data[ sj * 4 + 3 ];
           }
                // filling space ... not enough
                output_data[ 0 ] = input_data[ 0 ];
@@ -128,7 +128,7 @@ function create_slice(slice_image, lat_step, lon_step, night){
                output_data[ Math.ceil((mySlice_hidden.width + 1) * line_scale + myretina) * 4 + 3 ] = input_data[ (mySlice_hidden.width ) * 4 + 3 ];
           
           
-          ctx_slice.putImageData( out_pixel_slice, start_x - 1, si);
+          ctx_slice.putImageData( out_pixel_slice, start_x , si);
 
          }
 
