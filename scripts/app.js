@@ -9,9 +9,10 @@ outer_map_src = "";
 function initialize (){
      ui_init();
 
-     latitude_devide = 18;
-     longitude_devide = 6;
-     planet_radius = document.getElementById("viewer").clientHeight/2*0.8;
+     latitude_devide = 24;
+     longitude_devide = 8;
+     planet_radius = Math.min(document.getElementById("viewer").clientHeight/2*0.8, document.getElementById("viewer").clientWidth/2*0.8);
+//     planet_radius = 150;  // for test
      build_planet();
 
      EarthMap = new Image();
@@ -70,7 +71,7 @@ function build_planet(){
      console.log( MyPlanet.style.webkitTransformOrigin );
      MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
 
-     console.log( MyPlanet.style.webkitTransform );
+//     console.log( MyPlanet.style.webkitTransform );
 }
 
 function build_planet_shadow(){
