@@ -181,7 +181,7 @@ function rotate_move( event ){
      var  curY = (((event.targetTouches[0].pageX - startX) / Planet_width) * 90) + initial_RotationY;
 
           MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
-
+          face_satellite([curX,curY]);                   
 }
 
 function myLog(string, refresh){
