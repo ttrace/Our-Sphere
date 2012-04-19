@@ -39,6 +39,10 @@ div.planet{
 /*     -webkit-animation: sphereRotate 40s linear infinite; */
 }
 
+div#planet{
+     -webkit-animation: sphereRotate 86400s linear infinite;
+}
+
 .viewer .planet canvas, .viewer .planet-shadow div {
      position: absolute;
      top: 50%;
@@ -92,17 +96,23 @@ div.planet{
 /*     -webkit-transform-origin: 2px 2px 0px; */
 }
 
+.current-sat {
+	-webkit-transition-property			: -webkit-transform ;
+	-webkit-transition-duration			: 5s;
+	-webkit-transition-timing-function:	: linear;
+}
+
 /**/
 @-webkit-keyframes sphereRotate
 {
 	0%
 	{
-		-webkit-transform: rotateX(-20deg) rotateY( -0deg ) ;
+		-webkit-transform: rotateY( -0deg ) ;
 	}
 	
 	100%
 	{
-		-webkit-transform: rotateX(-20deg) rotateY( 360deg) ;
+		-webkit-transform: rotateY( 360deg) ;
 	}
 }
 

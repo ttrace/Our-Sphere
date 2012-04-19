@@ -96,9 +96,7 @@ oursatellite.prototype.build = function(){
                                                    " rotateX(0deg)";
      myPlanet.appendChild( orbit_plane );
 
-     for ( i = 0; i < 32; i++ ) {
           var date_step = new Date()
-               date_step.setTime( date.getTime() + (100000) * i);
           var time_step = new Orb.Time( date_step );
           var sat_position_step = this.satellite.position.rectangular( time_step );
           var sat_position_geo_step = this.satellite.position.geographic( time_step );
@@ -108,12 +106,56 @@ oursatellite.prototype.build = function(){
           var sat_lat = sat_position_geo_step.latitude;
           var sat_lon = sat_position_geo_step.longitude;
           var sat_att = planet_radius + sat_position_geo_step.altitude /  6378.137 * planet_radius;
-//          console.log( sat_lat, sat_lon, sat_att,  sat_position_geo_step.altitude);
-//          myLog(sat_position_step.z +"->"+ "translateZ("+zpos+"px)");
           var orbit_dot_wrapper = document.createElement("div");
-          orbit_dot_wrapper.id = ( i * 5 ) + "deg";
-//          orbit_dot.style.backgroundColor = "rgb(255, 0, 255)";
-//          orbit_dot.style.border = "black solid 1px";
+
+          var current_satellite = document.createElement("DIV");
+               current_satellite.className = "current-sat";
+               current_satellite.style.backgroundColor = "rgb(255, 255, 0)";
+               current_satellite.style.position = "absolute";
+               current_satellite.style.top = "50%";
+               current_satellite.style.left = "50%";
+               current_satellite.style.width = "20px";
+               current_satellite.style.height = "20px";
+               current_satellite.style.webkitTransformStyle= "preserve-3d";
+     
+               current_satellite.style.webkitTransformOrigin = "10px 10px 0px";
+               current_satellite.style.webkitTransform =  "translateX("+(xpos-10)+"px)" +
+                                                 "translateY("+(ypos-10)+"px)" +
+                                                 "translateZ("+zpos+"px)";
+
+          console.log("SAT", date_step, sat_position_step );
+          var current_satellite_image = document.createElement("CANVAS");
+               current_satellite_image.style.backgroundColor = "rgb(0, 255, 0)";
+               current_satellite_image.style.border = "black solid 1px";
+               current_satellite_image.style.position = "absolute";
+               current_satellite_image.style.top = "50%";
+               current_satellite_image.style.left = "50%";
+               current_satellite_image.style.width = "20px";
+               current_satellite_image.style.height = "20px";
+               current_satellite_image.style.webkitTransformOrigin = "10px 10px 0px";
+               current_satellite_image.style.webkitTransform = "translateX(-10px) translateY(-10px) rotateY(0deg)";
+     
+               current_satellite.appendChild( current_satellite_image );
+               orbit_plane.appendChild( current_satellite );
+          this.satellite_object = current_satellite;
+
+     for ( i = 0; i < 32; i++ ) {
+          var date_step = new Date()
+               date_step.setTime( date.getTime() - (50000) * i);
+          var time_step = new Orb.Time( date_step );
+          var sat_position_step = this.satellite.position.rectangular( time_step );
+          var sat_position_geo_step = this.satellite.position.geographic( time_step );
+          var xpos = sat_position_step.x /  6378.137 * planet_radius;
+          var zpos = sat_position_step.y /  6378.137 * planet_radius;
+          var ypos = sat_position_step.z /  6378.137 * planet_radius;
+          var sat_lat = sat_position_geo_step.latitude;
+          var sat_lon = sat_position_geo_step.longitude;
+          var sat_att = planet_radius + sat_position_geo_step.altitude /  6378.137 * planet_radius;
+          var orbit_dot_wrapper = document.createElement("div");
+
+          console.log("DOT", date_step, sat_position_step );
+
+//          orbit_dot_wrapper.id = ( i * 5 ) + "deg";
           orbit_dot_wrapper.style.position = "absolute";
           orbit_dot_wrapper.style.top = "50%";
           orbit_dot_wrapper.style.left = "50%";
@@ -122,15 +164,14 @@ oursatellite.prototype.build = function(){
           orbit_dot_wrapper.style.webkitTransformStyle= "preserve-3d";
 //          orbit_dot.style.opacity = "1.0";
           orbit_dot_wrapper.style.webkitTransformOrigin = "2px 2px 0px";
-          orbit_dot_wrapper.style.webkitTransform =  "translateX("+xpos+"px)" +
-                                            "translateY("+ypos+"px)" +
+          orbit_dot_wrapper.style.webkitTransform =  "translateX("+(xpos-2)+"px)" +
+                                            "translateY("+(ypos-2)+"px)" +
                                             "translateZ("+zpos+"px)";
 //           orbit_dot.style.webkitTransformOrigin = "2px 2px "+ sat_att +"px";
 //           orbit_dot.style.webkitTransform =  "translateZ("+0+"px)" +
 //                                              "rotateX("+sat_lon+"deg)" +
 //                                              "rotateY("+sat_lat+"deg)";
           var orbit_dot = document.createElement("CANVAS");
-//          orbit_dot.id = ( i * 5 ) + "deg";
           orbit_dot.style.backgroundColor = "rgb(255, 0, 255)";
           orbit_dot.className = "orbit-dot";
           orbit_dot.style.border = "black solid 1px";
@@ -141,10 +182,34 @@ oursatellite.prototype.build = function(){
           orbit_dot.style.height = "4px";
           orbit_dot.style.opacity = "1.0";
           orbit_dot.style.webkitTransformOrigin = "2px 2px 0px";
-          orbit_dot.style.webkitTransform = "rotateY(0deg)";
+          orbit_dot.style.webkitTransform = "translateX(-2px) translateY(-2px) rotateY(0deg)";
 
           orbit_dot_wrapper.appendChild( orbit_dot );
           orbit_plane.appendChild( orbit_dot_wrapper );
      }
+
+     var self = this;
+     this.satellite_animation_timer = setInterval( function(){self.update()} , 5000);
 }
 
+oursatellite.prototype.update = function(){
+     var target_satellite = this.satellite_object;
+     var date_step = new Date()
+          date_step.setTime( date_step.getTime() + (5000));
+     var time_step = new Orb.Time( date_step );
+     var sat_position_step = this.satellite.position.rectangular( time_step );
+     var sat_position_geo_step = this.satellite.position.geographic( time_step );
+     var xpos = sat_position_step.x /  6378.137 * planet_radius;
+     var zpos = sat_position_step.y /  6378.137 * planet_radius;
+     var ypos = sat_position_step.z /  6378.137 * planet_radius;
+     var sat_lat = sat_position_geo_step.latitude;
+     var sat_lon = sat_position_geo_step.longitude;
+     var sat_att = planet_radius + sat_position_geo_step.altitude /  6378.137 * planet_radius;
+
+//     console.log("update", xpos, zpos, ypos, target_satellite);
+    
+          target_satellite.style.webkitTransform =  "translateX("+(xpos-10)+"px)" +
+                                            "translateY("+(ypos-10)+"px)" +
+                                            "translateZ("+zpos+"px)";
+     
+}
