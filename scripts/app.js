@@ -20,7 +20,7 @@ function initialize (){
           EarthMap.crossOrigin = "use-credentials";
      if( !getParameterByName("map") )
      {
-          if( 2 * Math.PI * planet_radius * myretina >= 1600)
+          if( 2 * Math.PI * planet_radius * myretina >= 2000)
           {
                EarthMap.src = "images/terra_10th_first_light_map_lrg.jpg";
           } else {
