@@ -9,10 +9,9 @@ outer_map_src = "";
 function initialize (){
      ui_init();
 
-     latitude_devide = 24;
-     longitude_devide = 8;
      planet_radius = Math.min(document.getElementById("viewer").clientHeight/2*0.8, document.getElementById("viewer").clientWidth/2*0.8);
-//     planet_radius = 150;  // for test
+//     planet_radius = 50;  // for test
+
      build_planet();
 
      EarthMap = new Image();
