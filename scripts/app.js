@@ -1,5 +1,5 @@
-latitude_devide = 20;
-longitude_devide = 4;
+latitude_divide = 20;
+longitude_divide = 4;
 planet_radius = 200;
 myretina = window.devicePixelRatio;
 own_map = true;
@@ -11,6 +11,8 @@ function initialize (){
 
      planet_radius = Math.min(document.getElementById("viewer").clientHeight/2*0.8, document.getElementById("viewer").clientWidth/2*0.8);
 //     planet_radius = 50;  // for test
+     latitude_divide = Math.ceil(planet_radius / 7);
+     longitude_divide = Math.ceil(planet_radius / 16);
 
      build_planet();
 
@@ -58,11 +60,11 @@ function build_planet(){
      var MyPlanetX = MyPlanet.clientWidth;
      var MyPlanetY = MyPlanet.clientHeight;
 
-   for ( j = 0.5; j < longitude_devide ; j++ ) {
-          for ( i = 0; i < latitude_devide; i++ ) {
+   for ( j = 0.5; j < longitude_divide ; j++ ) {
+          for ( i = 0; i < latitude_divide; i++ ) {
                MyPlanet.appendChild( create_land_element(i, j, false) );
           }
-          for ( i = 0; i < latitude_devide; i++ ) {
+          for ( i = 0; i < latitude_divide; i++ ) {
                MyPlanet.appendChild( create_land_element(i, (j)*-1, false) );
           }
      }
@@ -79,11 +81,11 @@ function build_planet_shadow(){
      var MyPlanetX = MyPlanet.clientWidth;
      var MyPlanetY = MyPlanet.clientHeight;
 
-   for ( j = 0.5; j < longitude_devide ; j++ ) {
-          for ( i = 0; i < latitude_devide; i++ ) {
+   for ( j = 0.5; j < longitude_divide ; j++ ) {
+          for ( i = 0; i < latitude_divide; i++ ) {
                MyPlanet.appendChild( create_land_element(i, j, MyShadow) );
           }
-          for ( i = 0; i < latitude_devide; i++ ) {
+          for ( i = 0; i < latitude_divide; i++ ) {
                MyPlanet.appendChild( create_land_element(i, (j)*-1, MyShadow) );
           }
      }
@@ -95,8 +97,8 @@ function build_planet_shadow(){
 }
 
 function create_land_element( lat_step, lon_step, myShadow){
-     var lat = lat_step * (360 / latitude_devide);
-     var lon = lon_step * (90 / (longitude_devide));
+     var lat = lat_step * (360 / latitude_divide);
+     var lon = lon_step * (90 / (longitude_divide));
      var element_appendix = "";
      if( myShadow ){
           element_appendix = "night";
@@ -105,9 +107,9 @@ function create_land_element( lat_step, lon_step, myShadow){
      var my_planet_radius = planet_radius;
      if( myShadow ){ my_planet_radius = planet_radius + 2};
 
-     var bottom_length =  Math.sin( (360 / latitude_devide / 2) / 180 * Math.PI ) * 2 * Math.cos( (Math.abs(lon) - 90 / longitude_devide / 2 ) / 180 * Math.PI ) * my_planet_radius;
-     var height_length =  Math.sin( (90 / longitude_devide / 2) / 180 * Math.PI ) *2* my_planet_radius;
-     var offset_length = (Math.cos( (90 / longitude_devide / 2) / 180 * Math.PI ) ) * (Math.cos( (360 / latitude_devide / 2) / 180 * Math.PI ) ) * my_planet_radius;
+     var bottom_length =  Math.sin( (360 / latitude_divide / 2) / 180 * Math.PI ) * 2 * Math.cos( (Math.abs(lon) - 90 / longitude_divide / 2 ) / 180 * Math.PI ) * my_planet_radius;
+     var height_length =  Math.sin( (90 / longitude_divide / 2) / 180 * Math.PI ) *2* my_planet_radius;
+     var offset_length = (Math.cos( (90 / longitude_divide / 2) / 180 * Math.PI ) ) * (Math.cos( (360 / latitude_divide / 2) / 180 * Math.PI ) ) * my_planet_radius;
 
      var map_size_x = my_planet_radius * 2 * Math.PI;
      var map_size_y = map_size_x / 2;
@@ -124,9 +126,9 @@ function create_land_element( lat_step, lon_step, myShadow){
 
           land_element.style.webkitTransform =    "translateX("+ bottom_length/2*-1 +"px)" +
                                                   "translateY("+ height_length/2*-1 +"px)" + 
-                                                  "rotateY(" + (lat) + "deg)" + 
+                                                  "rotateY(" + (lat  + 180 + (360 / latitude_divide) / 2) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
-                                                  "translateZ("+ (offset_length) +"px)"+
+                                                  "translateZ("+ (offset_length * 0.98) +"px)"+
                                                   "";
 
      if( !myShadow ){
