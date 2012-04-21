@@ -2,10 +2,13 @@
 <head>
 <title>Our Sphere 2</title>
 <script src="oursphere.debug.js"></script>
+<script>
+  oursphere.config = {
+    debug: true
+  }
+</script>
 <!-- including orb.js  -->
 <script src="orb.js"></script>
-<script>
-</script>
 <link href="oursphere.debug.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width" />
 <meta name = "viewport" content = "width = device-width , user-scalable = no , initial-scale = 1.0">
@@ -14,11 +17,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 </head>
 <body onload="oursphere.initialize();">
-<div id="wrapper" ontouchstart="oursphere.rotate_start(event);"
-          ontouchmove="oursphere.rotate_move(event);"
-          ontouchend="oursphere.rotate_end(event);"
-          onmousemove="oursphere.rotate_move_mouse(event);"
-          onmousedown="oursphere.rotate_start_mouse(event);">
+<div id="wrapper">
      <div class="viewer" id="viewer">
           <div class="planet" id="planet_group" style="-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg)">
                <div class="planet" id="planet">
