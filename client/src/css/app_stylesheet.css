@@ -10,8 +10,7 @@ body {
 }
 
 div#wrapper{
-     height: 100%;
-     width: 100%;
+     background: black;
      margin: 0;
      padding: 0;
 }

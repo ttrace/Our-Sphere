@@ -7,7 +7,9 @@
 ##########################################################
 BASE_NAME = "oursphere"
 JS_CONCAT_FILE    = BASE_NAME + ".debug.js" 
+JS_EDITOR_CONCAT_FILE = "editor.debug.js" 
 JS_MIN_FILE       = BASE_NAME + ".js"
+JS_EDITOR_MIN_FILE    =  "editor.js"
 CSS_CONCAT_FILES  = [BASE_NAME + "@2x.debug.css", BASE_NAME + ".debug.css"]
 CSS_MIN_FILES     = [BASE_NAME + "@2x.css", BASE_NAME + ".css"]
 
@@ -43,7 +45,7 @@ import  "#{Dir.pwd}/test/test.rake"
 # Generate files
 ##########################################################
 SRCS = FileList["dist/*.*"]
-OBJS = FileList["test/public/javascripts/*.*", "../public/*.js", "../public/*.css", "../public/index.html"]
+OBJS = FileList["test/public/javascripts/*.*", "../public/*.js", "../public/*.css", "../public/*.html"]
 CLEAN.include(SRCS)
 CLOBBER.include(OBJS)
 
@@ -82,8 +84,12 @@ task :default => [:escape_utf16, DIST_DIR]  do
 
   # Concat all js files
   js_file_name = File.join(DIST_DIR, JS_CONCAT_FILE)
-  sh "#{CONCAT_SCRIPT} --root #{JS_DIR} --template all.js > #{js_file_name}"
+  sh "#{CONCAT_SCRIPT} --root #{JS_DIR} --template base.js > #{js_file_name}"
   puts 'Created ' + js_file_name
+
+  editor_js_file_name = File.join(DIST_DIR, JS_EDITOR_CONCAT_FILE)
+  sh "#{CONCAT_SCRIPT} --root #{JS_DIR} --template editor.js > #{editor_js_file_name}"
+  puts 'Created ' + editor_js_file_name
 
   lib_file_name = File.join(DIST_DIR, 'orb.js')
   sh "#{CONCAT_SCRIPT} --root #{LIB_DIR} --template orb.js > #{lib_file_name}"
@@ -122,6 +128,10 @@ task :minify => :check do
     out_js = File.join(DIST_DIR, JS_MIN_FILE)
     sh "#{MINIFY_LIB} #{in_js} > #{out_js}"
 
+    in_editor_js = File.join(DIST_DIR, JS_EDITOR_CONCAT_FILE)
+    out_editor_js = File.join(DIST_DIR, JS_EDITOR_MIN_FILE)
+    sh "#{MINIFY_LIB} #{in_editor_js} > #{out_editor_js}"
+
     in_css = File.join(DIST_DIR, CSS_CONCAT_FILES[0])
     out_css = File.join(DIST_DIR, CSS_MIN_FILES[0])
     sh "#{CLEAN_CSS_LIB} #{in_css} > #{out_css}"
@@ -138,11 +148,15 @@ task :debug => :default do
   puts '------------------------'
 
   # Implement me
-  cp File.join(SRC_DIR, 'index.html'), File.join(DEPLOY_DIR, 'index.html')
+  cp File.join(SRC_DIR, 'editor.html'), File.join(DEPLOY_DIR, 'editor.html')
+  cp File.join(SRC_DIR, 'widget.html'), File.join(DEPLOY_DIR, 'widget.html')
   cp File.join(DIST_DIR, JS_CONCAT_FILE), File.join(DEPLOY_DIR, JS_CONCAT_FILE)
+  cp File.join(DIST_DIR, JS_EDITOR_CONCAT_FILE), File.join(DEPLOY_DIR, JS_EDITOR_CONCAT_FILE)
   cp File.join(DIST_DIR, 'orb.js'), File.join(DEPLOY_DIR, 'orb.js')
   cp File.join(DIST_DIR, CSS_CONCAT_FILES[0]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[0])
   cp File.join(DIST_DIR, CSS_CONCAT_FILES[1]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[1])
+  cp File.join(SRC_DIR, '3rdparty', 'extjs', 'ext-all-debug.js'), File.join(DEPLOY_DIR, 'ext-all-debug.js')
+  #cp File.join(SRC_DIR, '3rdparty', 'extjs', 'ext-all.css'), File.join(DEPLOY_DIR, 'ext-all.css')
 
 end
 

@@ -6,6 +6,10 @@ var own_map = true;
 var outer_map_src = "";
 //myretina = 2; // for test retina resolution on standard display
 
+/**
+ *
+ */
+op.plugins = [];
 
 /**
  * Reference to all my satellites.
@@ -18,7 +22,13 @@ op.satellites = {};
  * @public
  */
 op.initialize = function(){
-     ui_init();
+
+    // Execute all registered plugins
+    op.plugins.forEach(function(p) {
+        p();
+    });
+
+    ui_init();
 
      planet_radius = Math.min(document.getElementById("viewer").clientHeight/2*0.8, document.getElementById("viewer").clientWidth/2*0.8);
 //     planet_radius = 50;  // for test
