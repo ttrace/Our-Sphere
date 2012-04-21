@@ -15,8 +15,8 @@ ui.createMapSelector = function() {
         {name: 'Moon', image_url: 'moon.jpg'},
         {name: 'Jupiter', image_url: 'jupiter.jpg'},
         {name: 'Mars', image_url: 'mars.jpg'},
-        {name: 'Venus', image_url: 'mars.jpg'},
-        {name: 'Night Mask', image_url: 'night_mask.jpg'},
+        {name: 'Venus', image_url: 'venus.jpg'},
+        {name: 'Night Mask', image_url: 'night_mask.png'},
     ];
 
     var store = Ext.create('Ext.data.Store', {
@@ -26,7 +26,6 @@ ui.createMapSelector = function() {
 
 
     var simpleCombo = Ext.create('Ext.form.field.ComboBox', {
-        //fieldLabel: 'Select a surface map',
         forceSelection: true,
         displayField: 'name',
         valueField: 'image_url',
@@ -35,7 +34,10 @@ ui.createMapSelector = function() {
         editable: false,
         queryMode: 'local',
         margin: '5 0 0 0',
-        typeAhead: true
+        typeAhead: true,
+        listeners: {
+            select: ui.handleMapChange
+        }
     });
 
 
@@ -53,4 +55,17 @@ ui.createMapSelector = function() {
         }, simpleCombo
         ]
     });
+}
+
+ui.handleMapChange = function(cmb, records) {
+    var data = records[0].data;
+    if (data.isLocal) {
+        var mapImg = new Image();
+        mapImg.src = 'images/' + data.image_url;
+        mapImg.addEventListener("load", function(){
+            op.mapping(mapImg, 0.5 , false)
+        });
+    } else {
+        // get from server
+    }
 }

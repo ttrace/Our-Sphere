@@ -17,5 +17,8 @@ op.Bundle = {};
 {{>bundle/ja_JP.js}}
 {{>bundle/en_US.js}}
 
+// exports
+op.mapping = mapping;
+
 })(this);
 
