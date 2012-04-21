@@ -12,4 +12,6 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 build/node_modules/*
 dist/*
+src/js/bundle/en_US.js
+src/js/bundle/ja_JP.js
 
