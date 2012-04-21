@@ -34,6 +34,7 @@ function check(text) {
     smarttabs: true,
     predef: [
       "Proxy",
+      "Orb",
       "console"
     ],
     maxerr: 100
