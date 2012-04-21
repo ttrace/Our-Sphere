@@ -103,13 +103,13 @@ div.current-sat {
 }
 
 canvas.iss.current-sat {
-     background-image: url('../images/iss.png');
+     background-image: url('./images/iss.png');
      -webkit-background-size: 100% 100%;
      border:none;
 }
 
 canvas.current-sat {
-     background-image: url('../images/sat.png');
+     background-image: url('./images/sat.png');
      -webkit-background-size: 100% 100%;
      border:none;
 }
