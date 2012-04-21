@@ -136,9 +136,12 @@ function create_land_element( lat_step, lon_step, myShadow){
           land_element.style.webkitTransformOrigin = bottom_length/2 + "px " +
                                                   height_length/2 + "px 0px";
 
+     var date = new Date();
+     var time = new Orb.Time(date);
+     
           land_element.style.webkitTransform =    "translateX("+ bottom_length/2*-1 +"px)" +
                                                   "translateY("+ height_length/2*-1 +"px)" + 
-                                                  "rotateY(" + (lat  + 180 + (360 / latitude_divide) / 2) + "deg)" + 
+                                                  "rotateY(" + (lat  + 180 + (360 / latitude_divide) / 2 + hour_angle) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
                                                   "translateZ("+ (offset_length * 0.98) +"px)"+
                                                   "";
