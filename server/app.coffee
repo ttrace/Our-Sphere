@@ -7,7 +7,8 @@ cluster = require 'cluster'
 os = require 'os'
 express = require 'express'
 coffee = require 'coffee-script'
-
+http = require 'http'
+url = require 'url'
 app = express.createServer()
 
 app.use express.static(__dirname + '/public')
@@ -19,13 +20,30 @@ client = redis.createClient()
 client.on "error", (err) ->
 	console.log "Error: #{err}"
 
-http_get = (request) ->
-	http.get options, (response) ->
-		console.log "Got response: " + res.statusCode
-	.on 'error', (e) ->
-		console.log 
+http_get = (request, callback) ->
+	http.get request, (res) ->
+		#console.log "Got response: " + res.statusCode
+		body = ""
+		res.on 'data', (data) ->
+			body += data;
+		res.on 'end', () ->
+			callback null, body
 	.on 'error', (e) ->
 		console.log "Got error: " + e.message
+
+http_get_with_cache = (request, callback) ->
+	client.get "oursp:#{request.host}#{request.path}", (err, value) ->
+		if value == null
+			http_get request, (err, body) ->
+				value = body
+				client.set "oursp:#{request.host}#{request.path}", value
+				callback(null, value)
+		else
+			callback(null, value)
+
+target_url = url.parse 'http://no32.tk/'
+http_get_with_cache target_url, (err, body) ->
+	console.log body
 
 app.get '/', (req, res) ->
 		data =
