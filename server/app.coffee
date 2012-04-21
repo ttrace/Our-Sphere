@@ -25,18 +25,18 @@ http_get = (request, callback) ->
 		#console.log "Got response: " + res.statusCode
 		body = ""
 		res.on 'data', (data) ->
-			body += data;
+			body += data
 		res.on 'end', () ->
 			callback null, body
 	.on 'error', (e) ->
 		console.log "Got error: " + e.message
 
 http_get_with_cache = (request, callback) ->
-	client.get "oursp:#{request.host}#{request.path}", (err, value) ->
+	client.get "oursp:image:base64:#{request.host}#{request.path}", (err, value) ->
 		if value == null
 			http_get request, (err, body) ->
 				value = body
-				client.set "oursp:#{request.host}#{request.path}", value
+				client.set "oursp:image:base64:#{request.host}#{request.path}", value
 				callback(null, value)
 		else
 			callback(null, value)
@@ -58,4 +58,6 @@ else
 	app.listen process.env.PORT || 3000
 
 app.listen(process.env.PORT || 3000)
+
+io = require('socket.io').listen app
 
