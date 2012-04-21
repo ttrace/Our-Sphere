@@ -1,4 +1,6 @@
+==========
 Our Sphere
+==========
 
 Our Sphere is published under MIT license.
 
@@ -14,30 +16,36 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+::
 
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+
+About Orb.js
+============
 
 Our Sphere includes Orb.js - JavaScript Library for Astronomical Calculations
 orb.js http://www.lizard-tail.com/isana/lab/orb/
 
 orb - core.js
 
-Orb 0.0.1 - Javascript Library for Astronomical Calcrations
+::
 
-Copyright (c) 2010 KASHIWAI, Isana
-Dual licensed under the MIT (MIT-LICENSE.txt), and GPL (GPL-LICENSE.txt) licenses.
+  Orb 0.0.1 - Javascript Library for Astronomical Calcrations
 
-Date: 2010-07-15 00:00:00 +0900 (Sun, 20 Jun 2010)
-Rev: 0001
+  Copyright (c) 2010 KASHIWAI, Isana
+  Dual licensed under the MIT (MIT-LICENSE.txt), and GPL (GPL-LICENSE.txt) licenses.
+  
+  Date: 2010-07-15 00:00:00 +0900 (Sun, 20 Jun 2010)
+  Rev: 0001
 
-This script includes "json2.js" on the last part of the file.
-"json2.js" creates a global JSON object
-Copyright/License: Public Domain
-ref. http://www.JSON.org/js.html
+  This script includes "json2.js" on the last part of the file.
+  "json2.js" creates a global JSON object
+  Copyright/License: Public Domain
+  ref. http://www.JSON.org/js.html
 
