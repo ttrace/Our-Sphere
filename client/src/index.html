@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <head>
 <title>Our Sphere 2</title>
-<script src="scripts/util.js"></script>
-<script src="scripts/ui.js"></script>
-<script src="scripts/oursatellite.js"></script>
-<script src="scripts/app.js"></script>
-<script src="scripts/image_map.js"></script>
+<script src="oursphere.debug.js"></script>
 <!-- including orb.js  -->
-<script src="scripts/orb/core.js"></script>
-<script src="scripts/orb/satellite.js"></script>
+<script src="orb.js"></script>
 <script>
 </script>
-<link href="stylesheets/app_stylesheet.css" rel="stylesheet">
+<link href="oursphere.debug.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width" />
 <meta name = "viewport" content = "width = device-width , user-scalable = no , initial-scale = 1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 </head>
-<body onload="initialize();">
-<div id="wrapper" ontouchstart="rotate_start(event);"
-          ontouchmove="rotate_move(event);"
-          ontouchend="rotate_end(event);"
-          onmousemove="rotate_move_mouse(event);"
-          onmousedown="rotate_start_mouse(event);">
+<body onload="oursphere.initialize();">
+<div id="wrapper" ontouchstart="oursphere.rotate_start(event);"
+          ontouchmove="oursphere.rotate_move(event);"
+          ontouchend="oursphere.rotate_end(event);"
+          onmousemove="oursphere.rotate_move_mouse(event);"
+          onmousedown="oursphere.rotate_start_mouse(event);">
      <div class="viewer" id="viewer">
           <div class="planet" id="planet_group" style="-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg)">
                <div class="planet" id="planet">
