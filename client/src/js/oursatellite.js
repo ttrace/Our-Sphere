@@ -94,6 +94,7 @@ oursatellite.prototype.build = function(){
           var time_step = new Orb.Time( date_step );
           var sat_position_step = this.satellite.position.rectangular( time_step );
           var sat_position_geo_step = this.satellite.position.geographic( time_step );
+          if( !sat_position_step.x ) console.log("ERROR: TLE seems invaild!-----")
           var zpos = sat_position_step.x /  6378.137 * planet_radius;
           var xpos = sat_position_step.y /  6378.137 * planet_radius;
           var ypos = sat_position_step.z /  6378.137 * planet_radius * -1;
