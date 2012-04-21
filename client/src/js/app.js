@@ -49,9 +49,21 @@ function initialize (){
           
      }
      
-     if( getParameterByName("satellite") ){
-          var mySat = new oursatellite();
-               mySat.build();
+     var satellitesStr = getParameterByName("satellite");
+     if(satellitesStr) {
+         satellitesStr.split(',').forEach(function(str) {
+             log('--- satellite parameter --');
+             log(str);
+             log('--------------------------');
+             var tle = [],
+                 name = str.split('_')[0];
+                 tleStr = str.split('_')[1];
+
+             tle.push(tleStr.substring(0, 69));
+             tle.push(tleStr.substring(69));
+             var mySat = new oursatellite(name, tle);
+             mySat.build();
+         });
      }
 }
 

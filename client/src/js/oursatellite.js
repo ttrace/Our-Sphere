@@ -1,36 +1,21 @@
-oursatellite = function(){
-     var self = this;  
+/**
+ *
+ * @class oursatellite
+ * @constructor
+ * @param {String} name Satellite name.
+ * @param {Array} tle_arr 2items array of TLE.
+ */
+var oursatellite = op.oursatellite = function(name, tle_arr){
+    this.name = name;
+    this.tle = tle_arr;
 }
 
 oursatellite.prototype ={
-     get tle ()
-	{
-		if (!("_tle" in this))
-				this._tle = document.getElementById("satellite_tle").innerText;
-		return this._tle.split("\n");
-	},
-	
-	set tle ( tle_string )
-	{
-		this._tle = tle_string;
-	},
-	
-	get name ()
-	{
-		if (!("_name" in this))
-				this._name = this.tle[0];
-		return this._name;
-	},
-	
-	set name ( x )
-	{
-		this._name = x;
-	},
 	
 	get first_line ()
 	{
 		if (!("_first_line" in this))
-				this._first_line = this.tle[1];
+				this._first_line = this.tle[0];
 		return this._first_line;
 	},
 	
@@ -42,7 +27,7 @@ oursatellite.prototype ={
 	get second_line ()
 	{
 		if (!("_second_line" in this))
-				this._second_line = this.tle[2];
+				this._second_line = this.tle[1];
 		return this._second_line;
 	},
 	
@@ -55,9 +40,12 @@ oursatellite.prototype ={
 	{
 		if (!("_satellite" in this))
 		{
-               var tle_for_orb = { "name" : this.name ,"first_line" : this.first_line, "second_line" : this.second_line  };
-               this._satellite = new Orb.Satellite( tle_for_orb );
-          }
+            log('Start create Orb.Satellite');
+            log('first_line:', this.first_line);
+            log('second_line:', this.second_line);
+            var tle_for_orb = { "name" : this.name ,"first_line" : this.first_line, "second_line" : this.second_line  };
+            this._satellite = new Orb.Satellite( tle_for_orb );
+        }
 		return this._satellite;
 	},
 	
