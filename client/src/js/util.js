@@ -8,9 +8,9 @@ function getParameterByName(name) {
 }
 
 function log() {
-  if (op.config.debug) {
-    console.log.call(null, arguments);
-  }
+    if (op.config.debug && window.console) {
+        console.log.apply(console, arguments);
+    }
 }
 
 // http://stackoverflow.com/questions/901115/get-query-string-values-in-javascript
