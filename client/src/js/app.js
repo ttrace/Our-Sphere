@@ -158,11 +158,11 @@ function create_land_element( lat_step, lon_step, myShadow){
      return( land_element );
 }
 
-startX = 0.0;
-startY = 0.0;
-initial_RotationX = -20.0;
-initial_RotationY = 0.0;
-initial_RotationZ = 0.0;
+var startX = 0.0;
+var startY = 0.0;
+var initial_RotationX = -20.0;
+var initial_RotationY = 0.0;
+var initial_RotationZ = 0.0;
 
 function rotate_start( event ){
      startX = event.targetTouches[0].pageX;
@@ -208,46 +208,44 @@ function myLog(string, refresh){
 
 var isMouseDown = false;
 function rotate_start_mouse( event ) {
-     console.log("mouse_down");
-     isMouseDown = true;
-     startX = event.pageX;
-     startY = event.pageY;
+    isMouseDown = true;
+    startX = event.pageX;
+    startY = event.pageY;
 
-     var MyPlanet = document.getElementById("planet");
-     MyPlanet.style.webkitAnimation = "";
+    var MyPlanet = document.getElementById("planet");
+    MyPlanet.style.webkitAnimation = "";
 
-     initial_Rotation();
-     };
-     
-document.onmouseup = function() {
-     isMouseDown = false;
+    initial_Rotation();
+};
 
-     initial_Rotation();
-     };
+function rotate_up_mouse(event) {
+    isMouseDown = false;
+    initial_Rotation();
+}
 
 function initial_Rotation(){
-     var MyPlanet = document.getElementById("planet_group");
-          initial_RotationX = parseFloat(MyPlanet.style.webkitTransform.split("deg")[0].split("(")[1])%180;
-          initial_RotationY = parseFloat(MyPlanet.style.webkitTransform.split("deg")[1].split("(")[1])%360;
-          initial_RotationZ = parseFloat(MyPlanet.style.webkitTransform.split("deg")[2].split("(")[1])%360;
-     return([initial_RotationX, initial_RotationY, initial_RotationZ]);
+    var MyPlanet = document.getElementById("planet_group");
+    initial_RotationX = parseFloat(MyPlanet.style.webkitTransform.split("deg")[0].split("(")[1])%180;
+    initial_RotationY = parseFloat(MyPlanet.style.webkitTransform.split("deg")[1].split("(")[1])%360;
+    initial_RotationZ = parseFloat(MyPlanet.style.webkitTransform.split("deg")[2].split("(")[1])%360;
+    return([initial_RotationX, initial_RotationY, initial_RotationZ]);
 }
 
 function rotate_move_mouse( event ){
-     if(isMouseDown){
-          event.preventDefault();
-          var MyPlanet = document.getElementById("planet_group");
-     
-          var Planet_height = MyPlanet.clientHeight;
-          var Planet_width = MyPlanet.clientWidth;
-     
-          var  curX = (-1 * (event.pageY - startY) / Planet_height) * 90 + initial_RotationX;
-               curX = Math.max(curX, -90);
-               curX = Math.min(curX,  90);
-          var  curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
+    if(isMouseDown){
+        event.preventDefault();
+        var MyPlanet = document.getElementById("planet_group");
 
-          MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
-          face_satellite([curX,curY]);                   
-          }
-     }
+        var Planet_height = MyPlanet.clientHeight;
+        var Planet_width = MyPlanet.clientWidth;
+
+        var curX = (-1 * (event.pageY - startY) / Planet_height) * 90 + initial_RotationX;
+        curX = Math.max(curX, -90);
+        curX = Math.min(curX,  90);
+        var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
+
+        MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
+        face_satellite([curX,curY]);                   
+    }
+}
 

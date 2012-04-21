@@ -23,4 +23,5 @@ function initMouseEvent() {
     w.addEventListener('touchend', rotate_end);
     w.addEventListener('mousemove', rotate_move_mouse);
     w.addEventListener('mousedown', rotate_start_mouse);
+    w.addEventListener('mouseup', rotate_up_mouse);
 }
