@@ -19,6 +19,14 @@ client = redis.createClient()
 client.on "error", (err) ->
 	console.log "Error: #{err}"
 
+http_get = (request) ->
+	http.get options, (response) ->
+		console.log "Got response: " + res.statusCode
+	.on 'error', (e) ->
+		console.log 
+	.on 'error', (e) ->
+		console.log "Got error: " + e.message
+
 app.get '/', (req, res) ->
 		data =
 			title: 'Our Sphere'
