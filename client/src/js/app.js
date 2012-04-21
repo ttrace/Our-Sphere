@@ -1,12 +1,23 @@
-latitude_divide = 20;
-longitude_divide = 4;
-planet_radius = 200;
-myretina = window.devicePixelRatio;
-own_map = true;
-outer_map_src = "";
+var latitude_divide = 20;
+var longitude_divide = 4;
+var planet_radius = 200;
+var myretina = window.devicePixelRatio;
+var own_map = true;
+var outer_map_src = "";
 //myretina = 2; // for test retina resolution on standard display
 
-function initialize (){
+
+/**
+ * Reference to all my satellites.
+ */
+op.satellites = {};
+
+/**
+ * Bootstrap point.
+ *
+ * @public
+ */
+op.initialize = function(){
      ui_init();
 
      planet_radius = Math.min(document.getElementById("viewer").clientHeight/2*0.8, document.getElementById("viewer").clientWidth/2*0.8);
@@ -16,8 +27,8 @@ function initialize (){
 
      build_planet();
 
-     EarthMap = new Image();
-          EarthMap.crossOrigin = "use-credentials";
+     var EarthMap = new Image();
+     EarthMap.crossOrigin = "use-credentials";
      if( !getParameterByName("map") )
      {
           if( 2 * Math.PI * planet_radius * myretina >= 2000)
@@ -48,7 +59,7 @@ function initialize (){
 //          Night_map_composite.addEventListener("load", setTimeout(function(){ mapping( Night_map_composite , 0.5 , true);} ,100) ,false);          
           
      }
-     
+
      var satellitesStr = getParameterByName("satellite");
      if(satellitesStr) {
          satellitesStr.split(',').forEach(function(str) {
@@ -63,6 +74,9 @@ function initialize (){
              tle.push(tleStr.substring(69));
              var mySat = new oursatellite(name, tle);
              mySat.build();
+
+             // Retain reference
+             op.satellites[name] = mySat;
          });
      }
 }

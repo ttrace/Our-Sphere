@@ -8,6 +8,10 @@
 var oursatellite = op.oursatellite = function(name, tle_arr){
     this.name = name;
     this.tle = tle_arr;
+    this.satellite = null;
+    this.satellite_orbit = null; // satellite wrapper
+    this.satellite_object = null; // satellite element
+    this.satellite_animation_timer = null; // timer
 }
 
 oursatellite.prototype ={
@@ -77,6 +81,7 @@ oursatellite.prototype.build = function(){
                                                    " rotateZ(0deg)" +
                                                    " rotateX(0deg)";
      myPlanet.appendChild( orbit_plane );
+     this.satellite_orbit = orbit_plane;
 
           var date_step = new Date()
           var time_step = new Orb.Time( date_step );
@@ -170,8 +175,7 @@ oursatellite.prototype.build = function(){
           orbit_plane.appendChild( orbit_dot_wrapper );
      }
 
-     var self = this;
-     this.satellite_animation_timer = setInterval( function(){self.update()} , 5000);
+     this.satellite_animation_timer = setInterval(bind(this.update, this), 5000);
 }
 
 oursatellite.prototype.update = function(){
@@ -192,6 +196,21 @@ oursatellite.prototype.update = function(){
                                             "translateY("+(ypos-10)+"px)" +
                                             "translateZ("+zpos+"px)";
      
+}
+
+oursatellite.prototype.destroy = function() {
+    // Clear timer
+    clearInterval(this.satellite_animation_timer);
+
+    // Remove dom elements
+    removeEl(this.satellite_orbit);
+    removeEl(this.satellite_object);
+
+    this.name = null;
+    this.tle = null;
+    this.satellite_orbit = null;
+    this.satellite_object = null;
+    this.satellite = null;
 }
 
 function face_satellite( planet_rotation ){

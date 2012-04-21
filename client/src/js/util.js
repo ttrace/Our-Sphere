@@ -13,5 +13,17 @@ function log() {
     }
 }
 
+function bind(fn, thisObj) {
+    return function() {
+        fn.apply(thisObj, arguments);
+    }
+}
+
+function removeEl(el) {
+    if (el && el.parentNode) {
+        el.parentNode.removeChild(el);
+    }
+}
+
 // http://stackoverflow.com/questions/901115/get-query-string-values-in-javascript
 
