@@ -138,6 +138,7 @@ function create_land_element( lat_step, lon_step, myShadow){
 
      var date = new Date();
      var time = new Orb.Time(date);
+     var hour_angle = time.gmst()*15;
      
           land_element.style.webkitTransform =    "translateX("+ bottom_length/2*-1 +"px)" +
                                                   "translateY("+ height_length/2*-1 +"px)" + 
