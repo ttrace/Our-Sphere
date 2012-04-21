@@ -5,7 +5,7 @@
 # > rake -T
 # 
 ##########################################################
-BASE_NAME = "outsphere"
+BASE_NAME = "oursphere"
 JS_CONCAT_FILE    = BASE_NAME + ".debug.js" 
 JS_MIN_FILE       = BASE_NAME + ".js"
 CSS_CONCAT_FILES  = [BASE_NAME + "@2x.debug.css", BASE_NAME + ".debug.css"]
@@ -14,18 +14,21 @@ CSS_MIN_FILES     = [BASE_NAME + "@2x.css", BASE_NAME + ".css"]
 ##########################################################
 # Directories
 ##########################################################
-BASE_DIR = File.expand_path(File.dirname(__FILE__))
-SRC_DIR       = File.join(BASE_DIR, "/src/js")
+BASE_DIR      = File.expand_path(File.dirname(__FILE__))
+LIB_DIR       = File.join(BASE_DIR, "/src/3rdparty")
+SRC_DIR       = File.join(BASE_DIR, "/src")
+JS_DIR        = File.join(BASE_DIR, "/src/js")
 CSS_DIR       = File.join(BASE_DIR, "/src/css")
 DIST_DIR      = File.join(BASE_DIR, "/dist")
 TEST_DIR      = File.join(BASE_DIR, "/test")
+DEPLOY_DIR    = File.join(BASE_DIR, "../public")
 ESCAPE_SCRIPT = File.join(BASE_DIR, "/build/escapeUTF16.js")
 CHECK_SCRIPT  = File.join(BASE_DIR, "/build/check.js")
 CONCAT_SCRIPT = File.join(BASE_DIR, "/build/concat.js")
 CLEAN_CSS_LIB = File.join(BASE_DIR, "/build/node_modules/clean-css/bin/cleancss")
 MINIFY_LIB    = File.join(BASE_DIR, "/build/node_modules/uglify-js/bin/uglifyjs --ascii")
 
-JS_TEMPLATE_FILE  = SRC_DIR + "all.js"
+JS_TEMPLATE_FILE  = JS_DIR + "all.js"
 CSS_TEMPLATE_FILE = CSS_DIR + "all.css"
 
 ##########################################################
@@ -40,7 +43,7 @@ import  "#{Dir.pwd}/test/test.rake"
 # Generate files
 ##########################################################
 SRCS = FileList["dist/*.*"]
-OBJS = FileList["test/public/javascripts/*.*"]
+OBJS = FileList["test/public/javascripts/*.*", "../public/*.js", "../public/*.css", "../public/index.html"]
 CLEAN.include(SRCS)
 CLOBBER.include(OBJS)
 
@@ -64,7 +67,7 @@ end
 
 desc "Convert unescaped js files to utf16-escaped format (\\uXXXX)"
 task :escape_utf16 do
-  Dir["#{SRC_DIR}/**/*.unescaped.js"].each do |file_name|
+  Dir["#{JS_DIR}/**/*.unescaped.js"].each do |file_name|
     escaped_file_name = file_name.sub(/\.unescaped\./, ".")
     sh "#{ESCAPE_SCRIPT} < #{file_name} > #{escaped_file_name}"
   end
@@ -79,8 +82,11 @@ task :default => [:escape_utf16, DIST_DIR]  do
 
   # Concat all js files
   js_file_name = File.join(DIST_DIR, JS_CONCAT_FILE)
-  sh "#{CONCAT_SCRIPT} --root #{SRC_DIR} --template all.js > #{js_file_name}"
+  sh "#{CONCAT_SCRIPT} --root #{JS_DIR} --template all.js > #{js_file_name}"
   puts 'Created ' + js_file_name
+
+  lib_file_name = File.join(DIST_DIR, 'orb.js')
+  sh "#{CONCAT_SCRIPT} --root #{LIB_DIR} --template orb.js > #{lib_file_name}"
 
   # Concat all css files
   css_file_name = File.join(DIST_DIR, CSS_CONCAT_FILES[0])
@@ -132,6 +138,11 @@ task :debug => :default do
   puts '------------------------'
 
   # Implement me
+  cp File.join(SRC_DIR, 'index.html'), File.join(DEPLOY_DIR, 'index.html')
+  cp File.join(DIST_DIR, JS_CONCAT_FILE), File.join(DEPLOY_DIR, JS_CONCAT_FILE)
+  cp File.join(DIST_DIR, 'orb.js'), File.join(DEPLOY_DIR, 'orb.js')
+  cp File.join(DIST_DIR, CSS_CONCAT_FILES[0]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[0])
+  cp File.join(DIST_DIR, CSS_CONCAT_FILES[1]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[1])
 
 end
 
