@@ -19,43 +19,41 @@ Orb.Satellite = Orb.Satellite || function(tle){
     var name = tle.name;
     var line1 = tle.first_line;
     var line2 = tle.second_line;
-//    var epy = Number(line1.slice(18,20));
-    var epy = Number(line1.split(/\s+/)[3].match(/^[0-9][0-9]/)[0]);
+    var epy = Number(line1.slice(18,20));
 
     //epoch_year should be smaller than 2057.
     if(epy<57){var epoch_year=epy+2000}else{var epoch_year=epy+1900};
-    var bstar_mantissa = Number(line1.split(/\s+/)[6].match(/^[0-9]+/)[0])*1e-5;
-    var bstar_exponent = Number("1e" + Number(line1.split(/\s+/)[6].match(/^[0-9]+(.+)/)[1]));
+    var bstar_mantissa = Number(line1.substring(53,59))*1e-5;
+    var bstar_exponent = Number("1e" + Number(line1.substring(59,61)));
     var bstar = bstar_mantissa*bstar_exponent
 
     var orbital_elements={
-      name: name,           
-      line_number_1 :   Number(line1.split(/\s+/)[0]),
-      catalog_no_1 :  Number(line1.split(/\s+/)[1].match(/(.+)./)[1]),
-      security_classification :  Number(line1.split(/\s+/)[1].match(/(.)$/)[1]),
-      international_identification : Number(line1.split(/\s+/)[2]),
+      name: name,
+      line_number_1 :   Number(line1.slice(0,0)),
+      catalog_no_1 :  Number(line1.slice(2,6)),
+      security_classification :  Number(line1.slice(7,7)),
+      international_identification : Number(line1.slice(9,17)),
       epoch_year : epoch_year,
-      epoch : Number(line1.split(/\s+/)[3].match(/..(.+)/)[1]),
-      first_derivative_mean_motion : Number(line1.split(/\s+/)[4]),
-            second_derivative_mean_motion : Number(line1.split(/\s+/)[5]),
+      epoch : Number(line1.substring(20,32)),
+      first_derivative_mean_motion : Number(line1.substring(33,43)),
+      second_derivative_mean_motion : Number(line1.substring(44,52)),
       bstar_mantissa: bstar_mantissa,
       bstar_exponent :bstar_exponent,
       bstar :bstar,
-      ephemeris_type :  Number(line1.split(/\s+/)[7]),
-      element_number :  Number(line1.split(/\s+/)[8].match(/(.+).$/)[1]),
+      ephemeris_type :  Number(line1.substring(62,63)),
+      element_number :  Number(line1.substring(64,68)),
       check_sum_1 :   Number(line1.substring(69,69)),
-      line_number_2 :   Number(line2.split(/\s+/)[0]),
-      catalog_no_2 :  Number(line2.split(/\s+/)[1]),
-      inclination : Number(line2.split(/\s+/)[2]),
-      right_ascension : Number(line2.split(/\s+/)[3]),
-      eccentricity : Number(line2.split(/\s+/)[4]),
-      argument_of_perigee : Number(line2.split(/\s+/)[5]),
-      mean_anomaly : Number(line2.split(/\s+/)[6]),
-      mean_motion : Number(line2.split(/\s+/)[7].match(/([0-9\.\-]{1,11})/)[1]),
-      rev_number_at_epoch : Number(line2.split(/\s+/)[7].match(/(.....).$/)[1]),
+      line_number_2 :   Number(line2.slice(0,0)),
+      catalog_no_2 :  Number(line2.slice(2,7)),
+      inclination : Number(line2.substring(8,16)),
+      right_ascension : Number(line2.substring(17,25)),
+      eccentricity : Number(line2.substring(26,33)),
+      argument_of_perigee : Number(line2.substring(34,42)),
+      mean_anomaly : Number(line2.substring(43,51)),
+      mean_motion : Number(line2.substring(52,63)),
+      rev_number_at_epoch : Number(line2.substring(64,68)),
       check_sum_2 :   Number(line1.substring(68,69))
     }
-     console.log(orbital_elements);
     return orbital_elements
   }
   
