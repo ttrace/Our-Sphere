@@ -19,9 +19,9 @@ var op = namespace.oursphere = {};
 
 op.Bundle = {};
 
-{{>bundle/ja_jp.js}}
+{{>bundle/ja_JP.js}}
 
-{{>bundle/en_us.js}}
+{{>bundle/en_US.js}}
 
 })(this);
 

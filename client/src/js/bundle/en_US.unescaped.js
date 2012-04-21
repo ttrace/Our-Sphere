@@ -1,7 +1,7 @@
 /**
  * Resource bundles for English
  */
-op.Bundle['ja_JP'] = {
+op.Bundle.en_US = {
 
   'common': {
     LABEL_ERROR: 'Error',
