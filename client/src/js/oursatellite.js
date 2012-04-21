@@ -129,9 +129,10 @@ oursatellite.prototype.build = function(){
                orbit_plane.appendChild( current_satellite );
           this.satellite_object = current_satellite;
 
-     for ( i = 0; i < 32; i++ ) {
+     var orbital_period = this.satellite.orbital_period * 60000;
+     for ( i = 0; i < 70; i++ ) {
           var date_step = new Date()
-               date_step.setTime( date.getTime() - (50000) * i);
+               date_step.setTime( date.getTime() - (orbital_period / 70) * i);
           var time_step = new Orb.Time( date_step );
           var sat_position_step = this.satellite.position.rectangular( time_step );
           var sat_position_geo_step = this.satellite.position.geographic( time_step );
