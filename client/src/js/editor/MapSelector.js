@@ -7,6 +7,7 @@ ui.createMapSelector = function() {
         {name: 'Mars', image_url: 'mars.jpg'},
         {name: 'Venus', image_url: 'venus.jpg'},
         {name: 'Night Mask', image_url: 'night.jpg'},
+        {name: 'Other...'}
     ];
 
     var store = Ext.create('Ext.data.Store', {
@@ -50,13 +51,17 @@ ui.createMapSelector = function() {
 
 ui.handleMapChange = function(cmb, records) {
     var data = records[0].data;
-    if (data.isLocal) {
-        var mapImg = new Image();
-        mapImg.src = 'images/' + data.image_url;
-        mapImg.addEventListener("load", function(){
-            op.mapping(mapImg, 0.5 , false)
-        });
+    if (data.image_url) {
+        if (data.isLocal) {
+            var mapImg = new Image();
+            mapImg.src = 'images/' + data.image_url;
+            mapImg.addEventListener("load", function(){
+                op.mapping(mapImg, 0.5 , false)
+            });
+        } else {
+            // get from server
+        }
     } else {
-        // get from server
+        // Add new remote map
     }
 }
