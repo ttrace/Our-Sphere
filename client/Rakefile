@@ -141,8 +141,10 @@ task :minify => :check do
 
 end
 
+EXT_CSS_DIR = File.join(DEPLOY_DIR, 'resources', 'css')
+directory EXT_CSS_DIR
 desc "Deploy files for debug"
-task :debug => :default do
+task :debug => [:default, EXT_CSS_DIR] do
   puts '------------------------'
   puts 'Deploy debug files'
   puts '------------------------'
