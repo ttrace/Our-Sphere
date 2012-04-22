@@ -25,3 +25,19 @@ function initMouseEvent() {
     w.addEventListener('mousedown', rotate_start_mouse);
     w.addEventListener('mouseup', rotate_up_mouse);
 }
+
+function suspendMouseEvent() {
+    var w = document.getElementById('wrapper');
+    w.removeEventListener('touchstart', rotate_start);
+    w.removeEventListener('touchmove', rotate_move);
+    w.removeEventListener('touchend', rotate_end);
+    w.removeEventListener('mousemove', rotate_move_mouse);
+    w.removeEventListener('mousedown', rotate_start_mouse);
+    w.removeEventListener('mouseup', rotate_up_mouse);
+}
+op.suspendMouseEvent = suspendMouseEvent;
+
+function resumeMouseEvent() {
+    initMouseEvent();
+}
+op.resumeMouseEvent = resumeMouseEvent;

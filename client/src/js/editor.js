@@ -14,6 +14,9 @@ var ui = editor.ui = {};
 
 {{>editor/Models.js}}
 {{>editor/components/SatelliteList.js}}
+{{>editor/components/AddMapWindow.js}}
+{{>editor/components/AddSatelliteWindow.js}}
+{{>editor/components/ExportWindow.js}}
 {{>editor/Viewport.js}}
 {{>editor/MapSelector.js}}
 {{>editor/SatelliteSelector.js}}

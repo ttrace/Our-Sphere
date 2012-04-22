@@ -85,7 +85,7 @@ Ext.define('Oursphere.SatelliteList', {
     createActions: function(){
         this.addAction = Ext.create('Ext.Action', {
             scope: this,
-            handler: this.onAddFeedClick,
+            handler: this.onAddSatelliteButton,
             text: 'Add Satellite',
             iconCls: 'satellite-add'
         });
@@ -117,14 +117,14 @@ Ext.define('Oursphere.SatelliteList', {
      * React to a feed attempting to be added
      * @private
      */
-    onAddFeedClick: function(){
-//        var win = Ext.create('widget.tlewindow', {
-//            listeners: {
-//                scope: this,
-//                feedvalid: this.onTleValid
-//            }
-//        });
-//        win.show();
+    onAddSatelliteButton: function(){
+        var win = Ext.create('widget.satellitewindow', {
+            listeners: {
+                scope: this,
+                valid: this.onTleValid
+            }
+        });
+        win.show();
     },
 
     onTleValid: function(win, name, tle){
