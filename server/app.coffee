@@ -12,9 +12,8 @@ url = require 'url'
 base64 = require 'base64-js'
 app = express.createServer()
 
-app.use express.static(__dirname + '../public')
+app.use express.static __dirname + '/../public'
 
-eco = require 'eco'
 redis = require 'redis'
 client = redis.createClient()
 
@@ -57,7 +56,7 @@ if cluster.isMaster
 	for i in [1...os.cpus().length]
 		worker = cluster.fork()
 else
-	app.listen process.env.PORT || 80
+	app.listen process.env.PORT || 3000
 
-app.listen(process.env.PORT || 80)
+app.listen(process.env.PORT || 3000)
 
