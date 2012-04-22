@@ -11,6 +11,8 @@ Ext.define('Oursphere.SatelliteList', {
 
     alias: 'widget.satellitelist',
 
+    autoScroll: true,
+
     animCollapse: true,
     title: 'Satellites',
 
