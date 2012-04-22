@@ -156,7 +156,7 @@ task :debug => :default do
   cp File.join(DIST_DIR, CSS_CONCAT_FILES[0]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[0])
   cp File.join(DIST_DIR, CSS_CONCAT_FILES[1]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[1])
   cp File.join(SRC_DIR, '3rdparty', 'extjs', 'ext-all-debug.js'), File.join(DEPLOY_DIR, 'ext-all-debug.js')
-  #cp File.join(SRC_DIR, '3rdparty', 'extjs', 'ext-all.css'), File.join(DEPLOY_DIR, 'ext-all.css')
+  cp File.join(SRC_DIR, '3rdparty', 'extjs', 'ext-all.css'), File.join(DEPLOY_DIR, 'resources', 'css', 'ext-all.css')
 
 end
 
