@@ -6,7 +6,7 @@ ui.createMapSelector = function() {
         {name: 'Jupiter', image_url: 'jupiter.jpg'},
         {name: 'Mars', image_url: 'mars.jpg'},
         {name: 'Venus', image_url: 'venus.jpg'},
-        {name: 'Night Mask', image_url: 'night_mask.png'},
+        {name: 'Night Mask', image_url: 'night.jpg'},
     ];
 
     var store = Ext.create('Ext.data.Store', {
