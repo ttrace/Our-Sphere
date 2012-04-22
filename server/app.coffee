@@ -47,6 +47,8 @@ http_get_with_cache_in_base64 = (request, callback) ->
 			callback(null, value)
 
 app.get '/base64image', (req, res) ->
+	req.header('Accept', '*/*')
+	req.header('Content-Type', 'base64')
 	target = url.parse Object.keys(req.query)[0]
 	ext = target.href.split('.').pop()
 	http_get_with_cache_in_base64 target, (err, body) ->
