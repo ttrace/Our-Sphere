@@ -61,7 +61,7 @@ Ext.define('Oursphere.ExportWindow', {
         this.on('beforedestroy', op.resumeMouseEvent);
         this.on('show', function() {
             op.suspendMouseEvent();
-            this.form.getComponent('name').focus();
+            this.form.getComponent('widget').focus();
         });
     }
     
