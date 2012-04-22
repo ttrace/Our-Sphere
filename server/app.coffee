@@ -9,7 +9,6 @@ express = require 'express'
 coffee = require 'coffee-script'
 http = require 'http'
 url = require 'url'
-base64 = require 'base64-js'
 app = express.createServer()
 
 app.use express.static __dirname + '/../public'
@@ -22,6 +21,7 @@ client.on "error", (err) ->
 
 http_get = (request, callback) ->
 	http.get request, (res) ->
+		res.setEncoding 'binary'
 		#console.log "Got response: " + res.statusCode
 		body = ""
 		res.on 'data', (data) ->
@@ -36,19 +36,18 @@ http_get_with_cache_in_base64 = (request, callback) ->
 	client.get "oursp:image:base64:#{request.host}#{request.path}", (err, value) ->
 		if value == null
 			http_get request, (err, body) ->
-				buffer = new ArrayBuffer body.length * 8
-				array = new Uint8Array buffer
-				from = []
-				for i in [0..body.length]
-					from.push i
-				data = base64.fromByteArray from
+				data = new Buffer(body, 'binary').toString('base64')
 				callback(null, data)
 		else
 			callback(null, value)
 
 app.get '/base64image', (req, res) ->
+	res.header 'Access-Control-Allow-Origin', '*'
+	res.header 'Content-Transfer-Encoding', 'base64'
+	res.header 'Content-Type', 'text/plain'
 	target = url.parse Object.keys(req.query)[0]
 	ext = target.href.split('.').pop()
+	#res.header 'Content-Type', "image/#{ext}"
 	http_get_with_cache_in_base64 target, (err, body) ->
 		res.send "data:image/#{ext};base64,#{body}"
 
