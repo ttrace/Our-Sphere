@@ -1,1 +1,2 @@
-{{>app_stylesheet.css}}
+{{>base.css}}
+{{>editor.css}}

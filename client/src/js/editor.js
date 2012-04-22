@@ -11,6 +11,9 @@ var op = namespace.oursphere;
 var editor = op.editor = {};
 var ui = editor.ui = {};
 
+
+{{>editor/Models.js}}
+{{>editor/SatelliteList.js}}
 {{>editor/Trap.js}}
 {{>editor/MapSelector.js}}
 {{>editor/SatelliteSelector.js}}

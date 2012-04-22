@@ -1,0 +1,31 @@
+
+.satellite-list {
+    padding: 0 3px 0 3px;
+}
+
+.satellite-list-item {
+    margin-top: 3px;
+    padding-left: 20px;
+    font-size: 11px;
+    line-height: 20px;
+    cursor: pointer;
+    background: url(resources/icons/sat.png) no-repeat 0 2px;
+    border: 1px solid #fff;
+}
+
+.satellite-list .x-item-selected {
+    font-weight: bold; 
+    color: #15428B;
+    background-color: #DFE8F6;
+    border: 1px dotted #A3BAE9;
+}
+
+.satellite-list-item-hover {
+    background-color: #eee;
+}
+
+
+.satellite-add {
+    background-image: url(resources/icons/add.png) !important;
+}
+

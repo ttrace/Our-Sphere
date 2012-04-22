@@ -7,8 +7,6 @@ op.plugins.push(function() {
     ];
 
     ui.initViewport();
-    ui.createMapSelector();
-    ui.createSatelliteSelector();
 });
 
 ui.initViewport = function() {
@@ -26,7 +24,16 @@ ui.initViewport = function() {
             collapsible: true,
             title: 'Resources',
             width: ui.resourceMenuWidth,
-            html: "aaaaaa"
+            layout: {
+                type: 'vbox'
+            },
+            defaults: {
+                width: '100%',
+            },
+            items: [
+                ui.createMapSelector(),
+                ui.createSatelliteSelector()
+            ]
         }, {
             region: 'center',
             html: viewHTML,

@@ -1,13 +1,3 @@
-
-Ext.define('op.SphereMap', {
-    extend: 'Ext.data.Model',
-    fields: [
-        {type: 'string', name: 'name'},
-        {type: 'string', name: 'image_url'},
-        {type: 'boolean', name: 'isLocal', defaultValue: true}
-    ]
-});
-
 ui.createMapSelector = function() {
 
     var data = [
@@ -41,9 +31,10 @@ ui.createMapSelector = function() {
     });
 
 
-    ui.root.items.get(0).add({
+    return {
         xtype: 'form',
         layout: '',
+        height: 60,
         bodyPadding: 5,
         defaults: {
             anchor: '100%'
@@ -54,7 +45,7 @@ ui.createMapSelector = function() {
             cls: 'margin:5px'
         }, simpleCombo
         ]
-    });
+    }
 }
 
 ui.handleMapChange = function(cmb, records) {
