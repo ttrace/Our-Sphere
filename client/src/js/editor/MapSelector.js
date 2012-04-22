@@ -7,6 +7,8 @@ ui.createMapSelector = function() {
         {name: 'Mars', image_url: 'mars.jpg'},
         {name: 'Venus', image_url: 'venus.jpg'},
         {name: 'Night Mask', image_url: 'night.jpg'},
+        {name: 'Cross domain', image_url: 'http://lab.taiyolab.com/base64image?http%3A%2F%2Fapod.nasa.gov%2Fapod%2Fimage%2F0011%2Fearthlights2_dmsp_big.jpg',
+        isLocal:false},
         {name: 'Other...'}
     ];
 
@@ -52,15 +54,47 @@ ui.createMapSelector = function() {
 ui.handleMapChange = function(cmb, records) {
     var data = records[0].data;
     if (data.image_url) {
+        var mapImg = new Image();
+
         if (data.isLocal) {
-            var mapImg = new Image();
             mapImg.src = 'images/' + data.image_url;
             mapImg.addEventListener("load", function(){
                 op.mapping(mapImg, 0.5 , false)
             });
         } else {
-            // get from server
+            var url = 'http://lab.taiyolab.com/base64image?' + data.image_url;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function(){
+              if ( xhr.readyState == 4 ) {
+                if ( xhr.status == 200 ) {
+                    mapImg.src = xhr.responseText;
+                    mapImg.addEventListener("load", function(){
+                        op.mapping(mapImg, 0.5 , false)
+                    });
+                } else {
+                    log('ERRRRRRRRRRRRR');
+                }
+              }
+            };
+            xhr.send(null);
+
+//            Ext.Ajax.request({
+//                url: 'http://lab.taiyolab.com/base64image?' + data.image_url,
+//                method: 'GET',
+//                success: function(response) {
+//                    console.info(response);
+//                }
+//            });
+//
+//            mapImg.addEventListener("load", function(){
+//                op.mapping(mapImg, 0.5 , false)
+//            });
+
+            console.log('BBBBBBBBBBBBBBBBBB');
+
         }
+        // TODO destory mapImg element
     } else {
         // Add new remote map
     }

@@ -2,7 +2,7 @@ op.plugins.push(function() {
 
     ui.resourceMenuWidth = 170;
     op.mainAreaSize = [
-        window.innerWidth - ui.resourceMenuWidth - 5, 
+        window.innerWidth - ui.resourceMenuWidth - 2, 
         window.innerHeight
     ];
 
@@ -22,6 +22,10 @@ ui.addShareButton = function() {
         bottom: '30px',
         right: '30px',
         zIndex: '100'
+    });
+    el.on('click', function() {
+        var win = Ext.create('widget.exportwindow');
+        win.show(el);
     });
     Ext.get('wrapper').appendChild(el);
 }
