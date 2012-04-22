@@ -7,7 +7,24 @@ op.plugins.push(function() {
     ];
 
     ui.initViewport();
+    ui.addShareButton();
 });
+
+ui.addShareButton = function() {
+    var div = document.createElement('div');
+    var el = Ext.get(div);
+    el.setStyle({
+        width: '56px',
+        height: '56px',
+        background: "url('./images/share.png?hoge') 50% 50% no-repeat",
+        position: 'absolute',
+        cursor: 'pointer',
+        bottom: '30px',
+        right: '30px',
+        zIndex: '100'
+    });
+    Ext.get('wrapper').appendChild(el);
+}
 
 ui.initViewport = function() {
 
@@ -45,5 +62,6 @@ ui.initViewport = function() {
             }
         }]
     });
+
 }
 
