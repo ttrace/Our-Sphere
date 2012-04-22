@@ -12,7 +12,7 @@ url = require 'url'
 base64 = require 'base64-js'
 app = express.createServer()
 
-app.use express.static(__dirname + '/public')
+app.use express.static(__dirname + '../public')
 
 eco = require 'eco'
 redis = require 'redis'
@@ -47,25 +47,17 @@ http_get_with_cache_in_base64 = (request, callback) ->
 		else
 			callback(null, value)
 
-app.get '/', (req, res) ->
-		data =
-			title: 'Our Sphere'
-		res.render 'index.html.eco', data: data
-
 app.get '/base64image', (req, res) ->
 	target = url.parse Object.keys(req.query)[0]
 	ext = target.href.split('.').pop()
 	http_get_with_cache_in_base64 target, (err, body) ->
 		res.send "data:image/#{ext};base64,#{body}"
 
-app.get '/externalimage', (req, res) ->
-	console.log req
-
 if cluster.isMaster
 	for i in [1...os.cpus().length]
 		worker = cluster.fork()
 else
-	app.listen process.env.PORT || 3000
+	app.listen process.env.PORT || 80
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 80)
 
