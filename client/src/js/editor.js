@@ -13,8 +13,8 @@ var ui = editor.ui = {};
 
 
 {{>editor/Models.js}}
-{{>editor/SatelliteList.js}}
-{{>editor/Trap.js}}
+{{>editor/components/SatelliteList.js}}
+{{>editor/Viewport.js}}
 {{>editor/MapSelector.js}}
 {{>editor/SatelliteSelector.js}}
 
