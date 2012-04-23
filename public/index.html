@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Our Sphere - a portable 3D data-map viewer -
+		</title>
+		<meta name="description" content="The International Space Apps Challenge 3D globe data map">
+		<meta name="author" content="Taiyo Fujii">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="shortcut icon" href="/static/img/favicon.ico">
+		<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-touch-icon-114x114.png">
+		<style>
+		     body{
+		          background-image:url('images/OurSphere.png');
+		          background-size:100%;
+		          background-repeat:no-repeat;
+		          background-color: black;
+		          color:white;
+		     }
+		     h1{
+		          margin-top: 250px;
+		     }
+		     body p, body div, body * {
+		     }
+		</style>
+	</head>
+	<body>
+<header id="main_header">
+</header>
+<section>
+
+
+<h1><a href="editor.html">Our Sphere</a></h1>
+<p>
+Our Sphere is a portable 3D data-map viewer for mobile and web.
+</p>
+
+
+
+<h2>Our Sphere on your web (API)</h2>
+<pre>
+&lt;iframe class="oursphere"
+        src="http://taiyolab.com/oursphere/?map=[your prefered image URL(escaped!)]"
+        width=200 height=200&gt;
+&lt;/iframe&gt;
+</pre>
+
+<ul>
+	<li>Importing image from Web</li>
+     <li>show orbital element(s)</li>
+</ul>
+<iframe class="oursphere" src="widget.html" width=200 height=200></iframe>
+<iframe class="oursphere" src="widget.html?map=http%3A//oceancolor.gsfc.nasa.gov/cgi/browse.pl/A20021742009365.CHL.CU.png%3Fsub%3Dl3image%26per%3DCU%26day%3D15442%26prm%3DCHL%26ndx%3D0%26mon%3D15400%26sen%3Dam%26dnm%3DD@M" width=200 height=200></iframe>
+<iframe class="oursphere" src="widget.html?satellite=true" width=200 height=200></iframe>
+
+<h2>Our Sphere on iOS</h2>
+<a href="http://lab.taiyolab.com/ourspheredev/">http://lab.taiyolab.com/ourspheredev/</a><br>
+<a href="http://lab.taiyolab.com/ourspheredev/?map=http%3A//oceancolor.gsfc.nasa.gov/cgi/browse.pl/A20021742009365.CHL.CU.png%3Fsub%3Dl3image%26per%3DCU%26day%3D15442%26prm%3DCHL%26ndx%3D0%26mon%3D15400%26sen%3Dam%26dnm%3DD@M">http://taiyolab.com/ourspheredev/?map=[your prefered image URL(escaped!)]</a>
+
+<h2>License</h2>
+<pre>
+Our Sphere is published under MIT license.
+
+Copyright © 2012 Taiyo Fujii.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre>
+</section>
+
+<footer id="main_footer">
+</footer>
+</body>
+</html>

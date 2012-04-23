@@ -1,0 +1,2 @@
+<h1 id="announce"><%= @data.title %></h1>
+Hello, Express.
