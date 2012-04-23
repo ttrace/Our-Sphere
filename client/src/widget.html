@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Our Sphere 2</title>
+<link href="./oursphere.debug.css" rel="stylesheet">
+<script src="./oursphere.debug.js"></script>
+<script>
+  oursphere.config = {
+    debug: true
+  }
+</script>
+
+<!-- including orb.js  -->
+<script src="./orb.js"></script>
+
+<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+<body onload="oursphere.initialize();">
+<div id="wrapper">
+     <div class="viewer" id="viewer">
+          <div class="planet" id="planet_group" style="-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg)">
+               <div class="planet" id="planet">
+                    <div class="planet" id="planet_shadow"></div>
+               </div>
+          </div>
+     </div>
+     <div class="interface">
+     <div class="ui-wrapper satellite" id="satellite_ui_wrapper">
+     </div><!-- end ui-wrapper -->
+     </div><!-- end interface -->
+</div><!-- end wrapper -->
+<div id="picture_factory" class="factory"></div>
+<div id = "mylog"></log>
+</body>
+</html>
