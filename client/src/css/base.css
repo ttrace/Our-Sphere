@@ -22,9 +22,9 @@ div.viewer {
 /*     top: 0px;
      left: 0px;  
      background-color: rgba(255, 0, 0, 0.5); */
-     perspective: 4000;
+     -webkit-perspective: 4000;
 /*     -webkit-transform-origin: 50% 50% 0; */
-     transform-style: preserve-3d;
+     -webkit-transform-style: preserve-3d;
 }
 
 div.planet{
@@ -34,12 +34,12 @@ div.planet{
 /*     top: 0px;
      left: 0px;
      -webkit-transform-origin: 50% 50% 0; */
-     transform-style: preserve-3d;
+     -webkit-transform-style: preserve-3d;
 /*     -webkit-animation: sphereRotate 40s linear infinite; */
 }
 
 div#planet{
-     animation: sphereRotate 86400s linear infinite;
+     -webkit-animation: sphereRotate 86400s linear infinite;
 }
 
 .viewer .planet canvas, .viewer .planet-shadow div {
@@ -65,7 +65,7 @@ div#planet{
 
 
 .interface {
-     transform-style: preserve-3d;
+     -webkit-transform-style: preserve-3d;
      position: absolute;
      top: 0px;
      left: 0px;
@@ -73,7 +73,7 @@ div#planet{
 
 .interface #satellite_tle {
      -webkit-user-select: auto;
-     transform: translateZ(100px);
+     -webkit-transform: translateZ(100px);
 }
 
 .controller, #mylog {
@@ -83,35 +83,9 @@ div#planet{
      background-color: rgba(255, 255, 255, 0.5);
      border-radius: 5px;
      padding: 5px;
-     transform: translateZ(500px);
+     -webkit-transform: translateZ(500px);
 }
 
-.orbit-dot {
-     width: 4px;
-     height: 4px;
-     -webkit-animation: dotAnimation 2s linear infinite;
-     border-radius: 2px;
-     border: 1px black solid;
-/*     -webkit-transform-origin: 2px 2px 0px; */
-}
-
-div.current-sat {
-	-webkit-transition-property			: -webkit-transform ;
-	-webkit-transition-duration			: 5s;
-	-webkit-transition-timing-function:	: linear;
-}
-
-canvas.iss.current-sat {
-     background-image: url('./images/iss.png');
-     background-size: 100% 100%;
-     border:none;
-}
-
-canvas.current-sat {
-     background-image: url('./images/sat.png');
-     background-size: 100% 100%;
-     border:none;
-}
 
 /**/
 @-webkit-keyframes sphereRotate
@@ -127,26 +101,6 @@ canvas.current-sat {
 	}
 }
 
-@-webkit-keyframes dotAnimation
-{
-	0%
-	{
-	     opacity: 0;
-		-webkit-transform: rotateX(0deg) rotateY(0deg);
-	}
-	
-	50%
-	{
-	     opacity: 1;
-		-webkit-transform: rotateX(180deg) rotateY(180deg);
-	}
-	
-	100%
-	{
-          opacity: 0;
-		-webkit-transform: rotateX(360deg) rotateY(360deg);
-	}
-}
 
 /**/
 canvas{

@@ -125,7 +125,17 @@ oursatellite.prototype.build = function(){
                current_satellite_image.style.webkitTransformOrigin = "20px 20px 0px";
                current_satellite_image.style.webkitTransform = "translateX(-20px) translateY(-20px) rotateY(0deg)";
      
+
+          var satellite_label = document.createElement("SPAN");
+               satellite_label.className = "current-sat";
+               satellite_label.innerText = this.name;
+          if( (ypos) > 0){
+               satellite_label.style.top = "35px";          
+          }
+               
                current_satellite.appendChild( current_satellite_image );
+               current_satellite.appendChild( satellite_label );
+               
                orbit_plane.appendChild( current_satellite );
           this.satellite_object = current_satellite;
 
@@ -216,16 +226,14 @@ oursatellite.prototype.destroy = function() {
 
 function face_satellite( planet_rotation ){
      var satellites = document.getElementsByClassName("current-sat");
-     //console.log(planet_rotation);
      if( satellites.length > 0 ){
           for ( i = 0; i < satellites.length; i++ ) {
-               if( satellites[i].nodeName == "CANVAS"){
+               if( satellites[i].nodeName == "CANVAS" || satellites[i].nodeName == "SPAN"){
                     var my_satellite = satellites[i];
                     my_satellite.style.webkitTransform = "";
                     my_satellite.style.webkitTransform = "translateX(-20px)  translateY(-20px) "+
-                                                       " rotateX("+ (planet_rotation[0]*-1) +"deg) "+
+                                                       " rotateX("+ (planet_rotation[0]   ) +"deg) "+
                                                        " rotateY("+ (planet_rotation[1]*-1) +"deg)";
-                    //console.log(my_satellite.style.webkitTransform);
                }
           }
      }
