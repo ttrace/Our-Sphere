@@ -130,9 +130,9 @@ oursatellite.prototype.build = function(){
                satellite_label.className = "current-sat";
                satellite_label.innerText = this.name;
           if( (ypos) > 0){
-               satellite_label.style.top = "35px";          
+               satellite_label.style.top = "35px";
           }
-               
+          
                current_satellite.appendChild( current_satellite_image );
                current_satellite.appendChild( satellite_label );
                
@@ -160,7 +160,6 @@ oursatellite.prototype.build = function(){
           orbit_dot_wrapper.style.width = "4px";
           orbit_dot_wrapper.style.height = "4px";
           orbit_dot_wrapper.style.webkitTransformStyle= "preserve-3d";
-//          orbit_dot.style.opacity = "1.0";
           orbit_dot_wrapper.style.webkitTransformOrigin = "2px 2px 0px";
           orbit_dot_wrapper.style.webkitTransform =  "translateX("+(xpos-2)+"px)" +
                                             "translateY("+(ypos-2)+"px)" +
