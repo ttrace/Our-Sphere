@@ -32,8 +32,8 @@ op.initialize = function(){
 
      planet_radius = Math.min(document.getElementById("viewer").clientHeight/2*0.8, document.getElementById("viewer").clientWidth/2*0.8);
 //     planet_radius = 50;  // for test
-     latitude_divide = Math.max(Math.ceil(planet_radius / 12), 12);
-     longitude_divide = Math.max(Math.ceil(planet_radius / 32), 4);
+     latitude_divide = Math.max(Math.ceil(planet_radius / 12), 16);
+     longitude_divide = Math.max(Math.ceil(planet_radius / 32), 5);
 
      build_planet();
 

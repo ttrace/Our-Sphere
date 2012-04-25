@@ -24,8 +24,8 @@ function mapping( map_image , start_point, night){
 //               for ( i = 0; i < 1; i++ ) { // for debug
                for ( i = 0; i < latitude_divide; i++ ) {
                     if( own_map ){
-                         setTimeout(create_slice( upper_map, i, j, night ), 100);
-                         setTimeout(create_slice( lower_map, i, (j*-1), night ), 100);
+                         setTimeout(create_slice( upper_map, i, j, night ), 250);
+                         setTimeout(create_slice( lower_map, i, (j*-1), night ), 500);
                     } else {
                          background_mapping(upper_map, i, j);
                          background_mapping(lower_map, i, (j*-1));                    
@@ -102,10 +102,7 @@ function create_slice(slice_image_context, lat_step, lon_step, night){
                output_data[ Math.ceil(sj * line_scale ) * 4 + 1 ] = input_data[ Math.min(sj , mySlice.width ) * 4 + 1 ];
                output_data[ Math.ceil(sj * line_scale ) * 4 + 2 ] = input_data[ Math.min(sj , mySlice.width ) * 4 + 2 ];
                output_data[ Math.ceil(sj * line_scale ) * 4 + 3 ] = input_data[ Math.min(sj , mySlice.width ) * 4 + 3 ];
-//               console.log(sj,input_data[ Math.min(sj , mySlice_hidden.width ) * 4     ],"<<",output_data[ Math.ceil(sj * line_scale ) * 4     ]);
           }
-         
-          
           ctx_slice.putImageData( out_pixel_slice, start_x , si);
 
          }

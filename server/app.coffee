@@ -55,7 +55,7 @@ if cluster.isMaster
 	for i in [1...os.cpus().length]
 		worker = cluster.fork()
 else
-	app.listen process.env.PORT || 3000
+	app.listen process.env.PORT || 3001
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3001)
 
