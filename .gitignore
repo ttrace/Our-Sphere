@@ -1,1 +1,4 @@
 .DS_Store
+public/oursphere.debug.less
+
+public/oursphere@2x.debug.less

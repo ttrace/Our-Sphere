@@ -1,6 +1,8 @@
+@orbit-dot-size: 4px;
+
 .orbit-dot {
-     width: 4px;
-     height: 4px;
+     width: @orbit-dot-size;
+     height: @orbit-dot-size;
      -webkit-animation: dotAnimation 2s linear infinite;
      border-radius: 2px;
      border: 1px black solid;
@@ -15,13 +17,13 @@ div.current-sat {
 
 canvas.iss.current-sat {
      background-image: url('./images/iss.png');
-     -webkit-background-size: 100% 100%;
+     background-size: 100% 100%;
      border:none;
 }
 
 canvas.current-sat {
      background-image: url('./images/sat.png');
-     -webkit-background-size: 100% 100%;
+     background-size: 100% 100%;
      border:none;
 }
 
@@ -32,7 +34,7 @@ span.current-sat {
      top       : -15px;
      left      : 30px;
      transform-origin: 50% 50% 0px;
-     -webkit-ransform: translateX(-20px) translateY(-20px) rotateY(0deg);
+     transform: translateX(-20px) translateY(-20px) rotateY(0deg);
      text-shadow: 0px 2px 4px black;
 }
 

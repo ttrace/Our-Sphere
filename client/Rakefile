@@ -10,7 +10,7 @@ JS_CONCAT_FILE    = BASE_NAME + ".debug.js"
 JS_EDITOR_CONCAT_FILE = "editor.debug.js" 
 JS_MIN_FILE       = BASE_NAME + ".js"
 JS_EDITOR_MIN_FILE    =  "editor.js"
-CSS_CONCAT_FILES  = [BASE_NAME + "@2x.debug.css", BASE_NAME + ".debug.css"]
+CSS_CONCAT_FILES  = [BASE_NAME + "@2x.debug.less", BASE_NAME + ".debug.less"]
 CSS_MIN_FILES     = [BASE_NAME + "@2x.css", BASE_NAME + ".css"]
 
 ##########################################################
@@ -94,6 +94,9 @@ task :default => [:escape_utf16, DIST_DIR]  do
   lib_file_name = File.join(DIST_DIR, 'orb.js')
   sh "#{CONCAT_SCRIPT} --root #{LIB_DIR} --template orb.js > #{lib_file_name}"
 
+  lib_file_name = File.join(DIST_DIR, 'util.js')
+  sh "#{CONCAT_SCRIPT} --root #{LIB_DIR} --template util.js > #{lib_file_name}"
+
   # Concat all css files
   css_file_name = File.join(DIST_DIR, CSS_CONCAT_FILES[0])
   sh "#{CONCAT_SCRIPT} --root #{CSS_DIR} --template all.css > #{css_file_name}"
@@ -157,9 +160,9 @@ task :debug => [:default, EXT_CSS_DIR] do
   cp File.join(DIST_DIR, 'orb.js'), File.join(DEPLOY_DIR, 'orb.js')
   cp File.join(DIST_DIR, CSS_CONCAT_FILES[0]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[0])
   cp File.join(DIST_DIR, CSS_CONCAT_FILES[1]), File.join(DEPLOY_DIR, CSS_CONCAT_FILES[1])
-  cp File.join(SRC_DIR, '3rdparty', 'prefixfree', 'prefixfree.min.js'), File.join(DEPLOY_DIR, 'ext-all-debug.js')
   cp File.join(SRC_DIR, '3rdparty', 'extjs', 'ext-all-debug.js'), File.join(DEPLOY_DIR, 'ext-all-debug.js')
   cp File.join(SRC_DIR, '3rdparty', 'extjs', 'ext-all.css'), File.join(DEPLOY_DIR, 'resources', 'css', 'ext-all.css')
+  cp File.join(DIST_DIR, 'util.js'), File.join(DEPLOY_DIR, 'util.js')
 
 end
 

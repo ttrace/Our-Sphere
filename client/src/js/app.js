@@ -105,7 +105,7 @@ function build_planet(){
           }
      }
 
-     console.log( MyPlanet.style.webkitTransformOrigin );
+//     console.log( MyPlanet.style.webkitTransformOrigin );
      MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
 
 //     console.log( MyPlanet.style.webkitTransform );
