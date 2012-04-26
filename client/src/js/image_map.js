@@ -12,7 +12,8 @@ function mapping( map_image , start_point, night){
      //     myLog("try...");
      } else {
         for ( var j = long_start; j < longitude_divide ; j++ ) {
-               if( own_map ){
+               if( own_map )
+               {
                     var upper_map = band_image( map_image, j );
                     var lower_map = band_image( map_image, j*-1 );
                     if( upper_map == false || lower_map == false ){
@@ -21,11 +22,14 @@ function mapping( map_image , start_point, night){
                          break;
                     }
                }
+               myLog('Image loaded',true);
 //               for ( i = 0; i < 1; i++ ) { // for debug
                for ( i = 0; i < latitude_divide; i++ ) {
+                    var current_upper_map = upper_map;
+                    var current_lower_map = lower_map;
                     if( own_map ){
-                         setTimeout(create_slice( upper_map, i, j, night ), 250);
-                         setTimeout(create_slice( lower_map, i, (j*-1), night ), 500);
+                         create_slice( current_upper_map, i, j, night );
+                         create_slice( current_lower_map, i, (j*-1), night );
                     } else {
                          background_mapping(upper_map, i, j);
                          background_mapping(lower_map, i, (j*-1));                    
@@ -60,8 +64,13 @@ function create_slice(slice_image_context, lat_step, lon_step, night){
      var mySlice = document.getElementById(element_appendix+lat_step+"_"+lon_step);
          mySlice.width = Math.ceil(bottom_length) * myretina;
          mySlice.height = height_length * myretina;
-
      var ctx_slice = mySlice.getContext("2d");
+
+     // offscreen buffer
+     var mySlice_off = document.createElement("CANVAS");
+         mySlice_off.width = Math.ceil(bottom_length) * myretina;
+         mySlice_off.height = height_length * myretina;
+     var ctx_slice_off = mySlice_off.getContext("2d");
 
      var base_image_offset = Math.floor(lat_length/360*lat) * myretina;
      var base_image_length = Math.ceil(bottom_length) * myretina;
@@ -84,10 +93,11 @@ function create_slice(slice_image_context, lat_step, lon_step, night){
                          * my_planet_radius;
      var slant_increasing_rate = (upper_length - bottom_length) / 2 / height_length;
 
+
 //     for ( var si = 0; si < 1; si++ ) { // for debug
      for ( var si = 0; si < Math.ceil(height_length) * myretina; si++ ) {
           var my_pixel_slice  = slice_image_context.getImageData(base_image_offset, si , mySlice.width + 1, 1 );
-          var out_pixel_slice = ctx_slice.createImageData(  mySlice.width + 1, 1 );
+          var out_pixel_slice = ctx_slice_off.createImageData(  mySlice.width + 1, 1 );
           var input_data = my_pixel_slice.data;
           var output_data = out_pixel_slice.data;
           var start_x = Math.ceil((bottom_length - upper_length) / 2 * myretina + slant_increasing_rate * si) ;
@@ -103,11 +113,16 @@ function create_slice(slice_image_context, lat_step, lon_step, night){
                output_data[ Math.ceil(sj * line_scale ) * 4 + 2 ] = input_data[ Math.min(sj , mySlice.width ) * 4 + 2 ];
                output_data[ Math.ceil(sj * line_scale ) * 4 + 3 ] = input_data[ Math.min(sj , mySlice.width ) * 4 + 3 ];
           }
-          ctx_slice.putImageData( out_pixel_slice, start_x , si);
-
+          ctx_slice_off.putImageData( out_pixel_slice, start_x , si);
+          setTimeout(function(){put_canvas_on_context( ctx_slice , mySlice_off )} , 100 * lon_step);
+          //ctx_slice.drawImage( mySlice_off , 0, 0);
          }
 
           mySlice.style.border = "none";
+}
+
+function put_canvas_on_context( ctx_slice , mySlice_off ){
+          ctx_slice.drawImage( mySlice_off , 0, 0);
 }
 
 // for slicing images onto each longitude band.

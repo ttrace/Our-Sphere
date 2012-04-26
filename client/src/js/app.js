@@ -47,7 +47,8 @@ op.initialize = function(){
           } else {
                EarthMap.src = "images/terra_10th_first_light_map_lrg_low.jpg";     
           }
-          EarthMap.addEventListener("load", setTimeout(function(){mapping(EarthMap, 0.5 , false)} ,100) ,false);
+          myLog('loading image',true);
+          EarthMap.addEventListener("load", mapping(EarthMap, 0.5 , false) ,false);
      } else {
           own_map = false;
           outer_map_src = unescape(getParameterByName("map"));
@@ -66,7 +67,6 @@ op.initialize = function(){
 //               Night_map_composite = night_image(night_map, night_mask);
           
           night_map.addEventListener("load", setTimeout(function(){ night_image(night_map, night_mask);} ,100) ,false);          
-//          Night_map_composite.addEventListener("load", setTimeout(function(){ mapping( Night_map_composite , 0.5 , true);} ,100) ,false);          
           
      }
 
@@ -168,7 +168,7 @@ function create_land_element( lat_step, lon_step, myShadow){
                                                   "translateY("+ height_length/2*-1 +"px)" + 
                                                   "rotateY(" + (lat  + 180 + (360 / latitude_divide) / 2 + hour_angle) + "deg)" + 
                                                   "rotateX(" + (lon) + "deg)"+
-                                                  "translateZ("+ (offset_length * 0.98) +"px)"+
+                                                  "translateZ("+ (offset_length * 0.99) +"px)"+
                                                   "";
 
      if( !myShadow ){
