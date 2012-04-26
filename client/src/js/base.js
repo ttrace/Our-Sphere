@@ -12,6 +12,7 @@ var op = namespace.oursphere = {};
 {{>ui.js}}
 {{>oursatellite.js}}
 {{>image_map.js}}
+{{>entangle_capture.js}}
 
 op.Bundle = {};
 {{>bundle/ja_JP.js}}

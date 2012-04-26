@@ -199,14 +199,22 @@ function rotate_start( event ){
      MyPlanet.style.webkitAnimation ="";
 
      initial_Rotation();
-     myLog();
+//     myLog();
 }
 
 function rotate_end( event ){
      var MyPlanet = document.getElementById("planet_group");
 
      initial_Rotation();
-     myLog('',true);
+     entangle_rotate([curX,curY]);
+
+     var Planet_height = MyPlanet.clientHeight;
+     var Planet_width = MyPlanet.clientWidth;
+     var curX = (-1 * (event.pageY - startY) / Planet_height) * 90 + initial_RotationX;
+     curX = Math.max(curX, -90);
+     curX = Math.min(curX,  90);
+     var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
+     entangle_rotate([curX,curY]);
 }
 
 function rotate_move( event ){
@@ -222,7 +230,7 @@ function rotate_move( event ){
      var  curY = (((event.targetTouches[0].pageX - startX) / Planet_width) * 90) + initial_RotationY;
 
           MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
-          face_satellite([curX,curY]);                   
+          face_satellite([curX,curY]);
 }
 
 function myLog(string, refresh){
@@ -247,8 +255,17 @@ function rotate_start_mouse( event ) {
 };
 
 function rotate_up_mouse(event) {
-    isMouseDown = false;
-    initial_Rotation();
+     isMouseDown = false;
+     initial_Rotation();
+
+         var MyPlanet = document.getElementById("planet_group");
+     var Planet_height = MyPlanet.clientHeight;
+     var Planet_width = MyPlanet.clientWidth;
+     var curX = (-1 * (event.pageY - startY) / Planet_height) * 90 + initial_RotationX;
+     curX = Math.max(curX, -90);
+     curX = Math.min(curX,  90);
+     var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
+     entangle_rotate([curX,curY]);
 }
 
 function initial_Rotation(){
@@ -273,7 +290,7 @@ function rotate_move_mouse( event ){
         var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
 
         MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
-        face_satellite([curX,curY]);                   
+        face_satellite([curX,curY]);
     }
 }
 
