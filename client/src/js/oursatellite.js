@@ -229,8 +229,8 @@ function face_satellite( planet_rotation ){
                     var my_satellite = satellites[i];
                     my_satellite.style.webkitTransform = "";
                     my_satellite.style.webkitTransform = "translateX(-20px)  translateY(-20px) "+
-                                                       " rotateX("+ (planet_rotation[0]   ) +"deg) "+
-                                                       " rotateY("+ (planet_rotation[1]*-1) +"deg)";
+                                                       " rotateY("+ (planet_rotation[1] * - 1) +"deg)" +
+                                                       " rotateX("+ (planet_rotation[0] * - 1) +"deg) ";
                }
           }
      }
