@@ -197,7 +197,7 @@ function rotate_start( event ){
      startY = event.targetTouches[0].pageY;
      var MyPlanet = document.getElementById("planet_group");
      MyPlanet.style.webkitAnimation ="";
-
+     MyPlanet.className = "planet"
      initial_Rotation();
 //     myLog();
 }
@@ -214,6 +214,7 @@ function rotate_end( event ){
      curX = Math.max(curX, -90);
      curX = Math.min(curX,  90);
      var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
+
      entangle_rotate([curX,curY]);
 }
 
@@ -248,8 +249,9 @@ function rotate_start_mouse( event ) {
     startX = event.pageX;
     startY = event.pageY;
 
-    var MyPlanet = document.getElementById("planet");
+    var MyPlanet = document.getElementById("planet_group");
     MyPlanet.style.webkitAnimation = "";
+     MyPlanet.className = "planet"
 
     initial_Rotation();
 };
@@ -258,7 +260,7 @@ function rotate_up_mouse(event) {
      isMouseDown = false;
      initial_Rotation();
 
-         var MyPlanet = document.getElementById("planet_group");
+    var MyPlanet = document.getElementById("planet_group");
      var Planet_height = MyPlanet.clientHeight;
      var Planet_width = MyPlanet.clientWidth;
      var curX = (-1 * (event.pageY - startY) / Planet_height) * 90 + initial_RotationX;
