@@ -215,7 +215,7 @@ function rotate_end( event ){
      curX = Math.min(curX,  90);
      var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
 
-     entangle_rotate([curX,curY]);
+     entangle_rotate([initial_Rotation()[0],initial_Rotation()[1]]);
 }
 
 function rotate_move( event ){
@@ -232,6 +232,7 @@ function rotate_move( event ){
 
           MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
           face_satellite([curX,curY]);
+     initial_Rotation();
 }
 
 function myLog(string, refresh){
@@ -260,14 +261,15 @@ function rotate_up_mouse(event) {
      isMouseDown = false;
      initial_Rotation();
 
-    var MyPlanet = document.getElementById("planet_group");
+     var MyPlanet = document.getElementById("planet_group");
      var Planet_height = MyPlanet.clientHeight;
      var Planet_width = MyPlanet.clientWidth;
      var curX = (-1 * (event.pageY - startY) / Planet_height) * 90 + initial_RotationX;
-     curX = Math.max(curX, -90);
-     curX = Math.min(curX,  90);
+          curX = Math.max(curX, -90);
+          curX = Math.min(curX,  90);
      var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
-     entangle_rotate([curX,curY]);
+     entangle_rotate([initial_Rotation()[0],initial_Rotation()[1]]);
+//     initial_Rotation();
 }
 
 function initial_Rotation(){
@@ -292,6 +294,7 @@ function rotate_move_mouse( event ){
         var curY = (((event.pageX - startX) / Planet_width) * 90) + initial_RotationY;
 
         MyPlanet.style.webkitTransform = "rotateX("+ curX +"deg) rotateY("+ curY +"deg) rotateZ(0deg)";
+          myLog([curX,curY], true);
         face_satellite([curX,curY]);
     }
 }
