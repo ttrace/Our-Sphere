@@ -25,6 +25,6 @@ function entangle_sphere( rotation_data ){
           MyPlanet.className = "planet entangled";
           MyPlanet.style.webkitTransform = "rotateX("+ rotation_data[0] +"deg) rotateY("+ rotation_data[1] +"deg) rotateZ(0deg)";
         face_satellite([rotation_data[0] ,rotation_data[1]　]);
-     myLog([rotation_data[0] ,rotation_data[1]], true);
+//     myLog([rotation_data[0] ,rotation_data[1]], true);
      initial_Rotation();
 }
