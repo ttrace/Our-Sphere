@@ -35,7 +35,7 @@ div.planet{
 }
 
 div#planet{
-     animation: sphereRotate 86400s linear infinite;
+/*     animation: sphereRotate 86400s linear infinite; */
 }
 
 .viewer .planet canvas, .viewer .planet-shadow div {
