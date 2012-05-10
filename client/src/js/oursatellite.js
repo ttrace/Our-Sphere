@@ -68,7 +68,6 @@ oursatellite.prototype.build = function(){
      var orbit_plane = document.createElement("DIV");
           orbit_plane.id = "satellite";
           orbit_plane.className = "planet";
-//          orbit_plane.style.backgroundColor = "rgba(100, 0, 0, 0.7)";
           orbit_plane.style.position = "absolute";
           orbit_plane.style.top = "50%";
           orbit_plane.style.left = "50%";

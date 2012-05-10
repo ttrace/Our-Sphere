@@ -17,6 +17,11 @@ op.plugins = [];
 op.satellites = {};
 
 /**
+ * Reference to all my planets.
+ */
+op.planets = {};
+
+/**
  * Bootstrap point.
  *
  * @public
@@ -93,8 +98,6 @@ op.initialize = function(){
 
 function build_planet(){
      var MyPlanet = document.getElementById("planet");
-     var MyPlanetX = MyPlanet.clientWidth;
-     var MyPlanetY = MyPlanet.clientHeight;
 
    for ( j = 0.5; j < longitude_divide ; j++ ) {
           for ( i = 0; i < latitude_divide; i++ ) {
@@ -105,17 +108,12 @@ function build_planet(){
           }
      }
 
-//     console.log( MyPlanet.style.webkitTransformOrigin );
      MyPlanet.style.webkitTransform = "rotateX(-0deg) rotateY(-0deg) rotateZ(0deg)";
-
-//     console.log( MyPlanet.style.webkitTransform );
 }
 
 function build_planet_shadow(){
      var MyPlanet = document.getElementById("planet_shadow");
      var MyShadow = true;
-     var MyPlanetX = MyPlanet.clientWidth;
-     var MyPlanetY = MyPlanet.clientHeight;
 
    for ( j = 0.5; j < longitude_divide ; j++ ) {
           for ( i = 0; i < latitude_divide; i++ ) {
@@ -125,11 +123,6 @@ function build_planet_shadow(){
                MyPlanet.appendChild( create_land_element(i, (j)*-1, MyShadow) );
           }
      }
-     var MyPlanetX = MyPlanet.clientWidth;
-     var MyPlanetY = MyPlanet.clientHeight;
-//     MyPlanet.style.webkitTransformOrigin = MyPlanetX / 2 + "px " + MyPlanetY / 2 + "px 0px";
-//     console.log( 'shadow',MyPlanet.style.webkitTransformOrigin );
-//     console.log( 'shadow',MyPlanet.style.webkitTransform );
 }
 
 function create_land_element( lat_step, lon_step, myShadow){
@@ -297,4 +290,3 @@ function rotate_move_mouse( event ){
         face_satellite([curX,curY]);
     }
 }
-

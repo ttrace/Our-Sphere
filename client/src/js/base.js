@@ -10,6 +10,7 @@ var op = namespace.oursphere = {};
 {{>app.js}}
 {{>util.js}}
 {{>ui.js}}
+{{>ourplanet.js}}
 {{>oursatellite.js}}
 {{>image_map.js}}
 {{>entangle_capture.js}}
