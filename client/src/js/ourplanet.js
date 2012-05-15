@@ -8,6 +8,11 @@
 var ourplanet = op.ourplanet = function(name, map){
     this.name  = name;
     this.map   = map;
+
+//  adding this planet on list of planets
+     if (!op.planets[ this.name ]) {
+          op.planets[ this.name ] = this;
+     }
 }
 
 ourplanet.prototype ={
@@ -26,9 +31,6 @@ ourplanet.prototype.destroy = function() {
 // to create planet DOM element on viewer
 ourplanet.prototype.build = function() {
 
-//  adding this planet on list of planets
-     if (!op.planets[ this.name ]) {
-          op.planets[ this.name ] = this;
-     }
 }
 
+ 

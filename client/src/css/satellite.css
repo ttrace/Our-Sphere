@@ -21,6 +21,12 @@ canvas.iss.current-sat {
      border:none;
 }
 
+canvas.soyuz.current-sat {
+     background-image: url('./images/soyuz.png');
+     background-size: 100% 100%;
+     border:none;
+}
+
 canvas.current-sat {
      background-image: url('./images/sat.png');
      background-size: 100% 100%;

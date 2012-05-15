@@ -114,6 +114,7 @@ oursatellite.prototype.build = function(){
           var current_satellite_image = document.createElement("CANVAS");
                current_satellite_image.className = "current-sat";
                if( this.name.match(/ISS/)) current_satellite_image.className = "current-sat iss";
+               if( this.name.match(/SOYUZ/)) current_satellite_image.className = "current-sat soyuz";
                //current_satellite_image.style.backgroundColor = "rgb(0, 255, 0)";
                current_satellite_image.style.border = "none";
                current_satellite_image.style.position = "absolute";
