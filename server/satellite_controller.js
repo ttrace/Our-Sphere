@@ -13,6 +13,7 @@ io.of('/satellites').on('connection', function (socket) {
   socket.emit('satellite',  satellite_data);
   
   socket.on('satellite', function (data) {
+     satellite_data = data;
      socket.broadcast.emit( 'satellite' ,  data );
      console.log( data );
   });
